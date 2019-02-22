@@ -6,7 +6,7 @@ app.use(express.static('public'));
 
 
 app.get('/',function(req,res) {
-    res.sendFile('C:/Users/Ollie/Desktop/FYP/ArTest/index.html');
+    res.sendFile('index.html');
   });
 
 // we will pass our 'app' to 'https' server
