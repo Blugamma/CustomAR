@@ -2,25 +2,43 @@
 <html>
 
 <head>
-    <title>ar-test</title>
+    <title>PersonalisAR</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <script src="https://hammerjs.github.io/dist/hammer.js"></script>
 <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
 <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-touch-events/1.0.5/jquery.mobile-events.js"></script>
 <script>
     THREEx.ArToolkitContext.baseURL = 'https://rawgit.com/jeromeetienne/ar.js/master/three.js/';
 </script>
-<style>
-  .swiper-container {
-    width: 600px;
-    height: 300px;
-  }
-</style>
+<script src="js/script.js"></script>
 
-<body style='margin : 0px; overflow: hidden;'>
-
+<body>
+<header>
+  <div id="menu" onclick="openNav(this);">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+  </div>
+  <div id="logo">
+    <h1>PersonalisAR</h1>
+  </div>
+  <div class="headerIcons">
+    <div class="headerIcon">S</div>
+    <div class="headerIcon">B</div>
+  </div>
+</header>
+<div id="main">
+  <h1>test123</h1>
+</div>
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+  </div>
 </body>
 
 </html>
