@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
 body{
     padding: 0;
     margin:0;
 }
 
 header{
-    background-color: gray;
+    background-color: #19171c;
     height: 60px;
 }
 #menu{
@@ -13,9 +15,9 @@ header{
     padding-left: 10px;
 }
 .bar1, .bar2, .bar3{
-    width: 35px;
+    width: 30px;
     height: 3px;
-    background-color: black;
+    background-color:#38aa82;
     margin: 7px 0;
 }
 
@@ -30,7 +32,7 @@ header{
     z-index: 1;
     top: 60px;
     left: 0;
-    background-color: #111;
+    background-color: #19171c;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -43,6 +45,8 @@ header{
     color: #818181;
     display: block;
     transition: 0.3s;
+    font-family: 'Open Sans', sans-serif;
+    color: 	#38aa82;
   }
   
   .sidenav a:hover {
@@ -62,16 +66,26 @@ header{
     width:50%;
 }
 
+#logo img{
+    float:left;
+    margin-top:-5px;
+    padding-left: 5px;
+    width:45px;
+    height: 45px;
+}
+
 #logo h1{
     padding-left:10px;
     margin:0;
-    font-family: Tahoma, Geneva, sans-serif; 
+    font-family: 'Open Sans', sans-serif;
     font-size: 25px;
     font-weight: 100;
+    color: 	#38aa82;
+    float:left;
 }
 
 .headerIcons{
-    margin-top: 20px;
+    margin-top: 15px;
     float:right;
     width:20%;
 }
@@ -79,4 +93,39 @@ header{
     text-align: center;
     float:left;
     width:50%;
+}
+
+.headerIcon i{
+    color: #38aa82;
+    font-size: 25px;
+}
+
+#productImage{
+    width:800px;
+    height: auto;
+    display:block;
+}
+
+#ARpersonalise{
+    width:300px;
+    background-color: #38aa82;
+    height: 50px;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+#ARpersonalise:hover, #ARpersonalise p:hover{
+    background-color: #19171c;
+    color: #38aa82;
+    border-radius: 10px;
+}
+
+#ARpersonalise p{
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    text-align: center;
+}
+
+.a-camera-static{
+    width:500px;
 }
