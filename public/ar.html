@@ -7,8 +7,7 @@
 <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
 <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-touch-events/1.0.5/jquery.mobile-events.js"></script>
-<script src="AppGesture.js"></script>
+<script src="js/jscolor.js"></script>
 <script>
     THREEx.ArToolkitContext.baseURL = 'https://rawgit.com/jeromeetienne/ar.js/master/three.js/';
 </script>
@@ -32,7 +31,18 @@
 
             var mesh = el.getObject3D('mesh');
             console.log(mesh.material.color);
-            mesh.material.color.set('red');
+            var redBtn = document.getElementById("personalise");
+            
+
+            $(redBtn).click(function(){
+                var colorPicker = document.getElementById("jscolor");
+            var colorPickerValue = colorPicker.style.backgroundColor;
+                console.log(colorPickerValue);
+                mesh.material.color.set(colorPickerValue);
+            });
+             
+           
+            
 
         }
     });
@@ -55,6 +65,11 @@
        
         
     </a-scene>
-    <p style="z-index:9999; position:absolute; top:10px;">test</p>
+    <div id="overlay">
+        <p>Choose a colour:</p>
+        <button id="jscolor" class="jscolor {width:243, height:150, position:'bottom',
+        borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#666', valueElement:null}" style="width:50px; height:20px;"></button>
+        <div id="personalise"><p>Personalise</p></div>
+    </div>
 </body>
 </html>

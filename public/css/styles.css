@@ -106,26 +106,34 @@ header{
     display:block;
 }
 
-#ARpersonalise{
-    width:300px;
-    background-color: #38aa82;
-    height: 50px;
-    border-radius: 10px;
-    padding: 5px;
+
+#overlay{
+    position:absolute;
+    top:10px;
+    background-color:#19171c;
+    width:200px;
+    border-radius:10px;
+    left:10px;
+    padding-left:10px;
 }
 
-#ARpersonalise:hover, #ARpersonalise p:hover{
-    background-color: #19171c;
-    color: #38aa82;
-    border-radius: 10px;
-}
-
-#ARpersonalise p{
+#overlay p{
     font-family: 'Open Sans', sans-serif;
-    color: white;
-    text-align: center;
+    font-size: 15px;
+    font-weight: 100;
+    color: 	#38aa82;
 }
 
-.a-camera-static{
-    width:500px;
+#personalise{
+    background-color: #38aa82;
+    width:150px;
+}
+
+#personalise p{
+    text-align:center;
+    color:white;
+}
+
+#personalise:hover{
+    cursor: pointer;
 }
