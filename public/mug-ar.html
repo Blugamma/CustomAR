@@ -12,7 +12,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="images/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="images/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="images/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
@@ -20,7 +20,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="images/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 </head>
 <script src="https://hammerjs.github.io/dist/hammer.js"></script>
 <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
@@ -36,50 +36,73 @@
     }
 </style>
 <script>
-    AFRAME.registerComponent('change-material-on-click', {
-        schema: {
-            target: {
-                type: 'selector'
-            }
-        },
+    AFRAME.registerComponent('start', {
         init: function () {
-            var el = this.el; // Element to add click listener.
-            var mesh = el.getObject3D('mesh');
-            console.log(mesh.material);
+
+
+            this.canvas = document.getElementById('canvas');
+            this.ctx = canvas.getContext("2d");
+            this.ctx.fillStyle = "white";
+            this.ctx.fillRect(0, 0, 2448, 800);
+            this.ctx.font = "10px Arial";
+            this.ctx.fillStyle = "black";
+            this.ctx.fillText("Text Here", 70, 100);
+
+
             var personaliseBtn = document.getElementById("personalise");
             $(personaliseBtn).click(function () {
                 var colorPicker = document.getElementById("jscolor");
                 var colorPickerValue = colorPicker.style.backgroundColor;
-                console.log(colorPickerValue);
-                mesh.material.color.set(colorPickerValue);
+                var textColorPicker = document.getElementById("textJscolor");
+                var textColorPickerValue = textColorPicker.style.backgroundColor;
+                var personalisedTxt = document.getElementById("personaliseTxt").value;
+
+
+                this.canvas = document.getElementById('canvas');
+                this.ctx = canvas.getContext("2d");
+                this.ctx.fillStyle = colorPickerValue;
+                this.ctx.fillRect(0, 0, 2448, 800);
+                this.ctx.font = "10px Arial";
+                this.ctx.fillStyle = textColorPickerValue;
+                this.ctx.fillText(personalisedTxt, 70, 100);
             });
+
         }
     });
 </script>
 
 <body>
-    <a-scene createCanvas embedded arjs>
+    <a-scene start embedded arjs>
         <a-assets>
             <a-asset-item id="mug-obj" src="Coffecupobj.obj"></a-asset-item>
             <a-asset-item id="mug-mtl" src="Coffe cup.mtl"></a-asset-item>
+            <a-asset-item id="mug-mtl2" src="coffeMug1_free_obj.mtl"></a-asset-item>
             <a-asset-item id="mug-obj2" src="coffeMug1_free_obj.obj"></a-asset-item>
             <img id="my-texture" src="freeMug3.png">
+            <canvas id="canvas"></canvas>
         </a-assets>
         <a-marker preset='hiro'>
-            <a-obj-model scale="0.02 0.02 0.02" src="#mug-obj2" material="src: #my-texture" change-material-on-click>
+            <a-obj-model scale="0.02 0.02 0.02" src="#mug-obj2" material="src: #canvas" >
                 <!--<a-animation attribute="rotation" dur="9000" to="0 360 0" repeat="indefinite" easing="linear"></a-animation>-->
             </a-obj-model>
         </a-marker>
         <a-camera-static />
-</a-scene>
+    </a-scene>
     <div id="overlay">
-        <p>Choose a colour:</p>
+        <p>Mug Colour:</p>
         <button id="jscolor" class="jscolor {width:243, height:150, position:'bottom',
         borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c', valueElement:null}"
             style="width:50px; height:20px;"></button>
+        <p>Text Colour:</p>
+        <button id="textJscolor" class="jscolor {width:243, height:150, position:'bottom',
+            borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c', valueElement:null}"
+            style="width:50px; height:20px;"></button>
+        <p>Personalised Text</p>
+        <input id="personaliseTxt" type="text" />
         <div id="personalise">
             <p>Personalise</p>
         </div>
     </div>
 </body>
+
 </html>
