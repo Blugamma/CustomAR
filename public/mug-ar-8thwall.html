@@ -22,14 +22,17 @@
     <meta name="theme-color" content="#ffffff">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 </head>
-<script src="https://hammerjs.github.io/dist/hammer.js"></script>
-<script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
-<script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+ <!-- We've included a slightly modified version of A-Frame, which fixes some polish concerns -->
+ <script src="//cdn.8thwall.com/web/aframe/8frame-0.8.2.min.js"></script>
+
+ <!-- XR Extras - provides utilities like load screen, almost there, and error handling.
+      See github.com/8thwall/web/xrextras -->
+ <script src="//cdn.8thwall.com/web/xrextras/xrextras.js"></script>
+
+ <!-- 8thWall Web - Replace the app key here with your own app key -->
+ <script async src="//apps.8thwall.com/xrweb?appKey=5vdXBAyadNFIsmV8CJerW6wobuwlcEAhdglAM3HbMuIaJEY0nmxMHSRQusGautFmkDNi7X"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 <script src="js/jscolor.js"></script>
-<script>
-    THREEx.ArToolkitContext.baseURL = 'https://rawgit.com/jeromeetienne/ar.js/master/three.js/';
-</script>
 <style>
     #arjsDebugUIContainer {
         display: none !important;
@@ -38,6 +41,8 @@
 <script>
     AFRAME.registerComponent('start', {
         init: function () {
+
+
             this.canvas = document.getElementById('canvas');
             this.ctx = canvas.getContext("2d");
             this.ctx.fillStyle = "white";
@@ -45,6 +50,8 @@
             this.ctx.font = "10px Arial";
             this.ctx.fillStyle = "black";
             this.ctx.fillText("Text Here", 70, 100);
+
+
             var personaliseBtn = document.getElementById("personalise");
             $(personaliseBtn).click(function () {
                 var colorPicker = document.getElementById("jscolor");
@@ -52,6 +59,8 @@
                 var textColorPicker = document.getElementById("textJscolor");
                 var textColorPickerValue = textColorPicker.style.backgroundColor;
                 var personalisedTxt = document.getElementById("personaliseTxt").value;
+
+
                 this.canvas = document.getElementById('canvas');
                 this.ctx = canvas.getContext("2d");
                 this.ctx.fillStyle = colorPickerValue;
@@ -60,12 +69,22 @@
                 this.ctx.fillStyle = textColorPickerValue;
                 this.ctx.fillText(personalisedTxt, 70, 100);
             });
+
         }
     });
 </script>
 
 <body>
-    <a-scene start embedded arjs>
+    <a-scene
+    xrweb
+    xrextras-tap-recenter
+    xrextras-almost-there
+    xrextras-loading
+    xrextras-runtime-error start>
+    <a-camera position="0 8 8"></a-camera>
+
+
+      
         <a-assets>
             <a-asset-item id="mug-obj" src="Coffecupobj.obj"></a-asset-item>
             <a-asset-item id="mug-mtl" src="Coffe cup.mtl"></a-asset-item>
@@ -74,12 +93,11 @@
             <img id="my-texture" src="freeMug3.png">
             <canvas id="canvas"></canvas>
         </a-assets>
-        <a-marker preset='hiro'>
-            <a-obj-model scale="0.02 0.02 0.02" src="#mug-obj2" material="src: #canvas" >
-                <!--<a-animation attribute="rotation" dur="9000" to="0 360 0" repeat="indefinite" easing="linear"></a-animation>-->
+        
+            <a-obj-model scale="0.07 0.07 0.07" src="#mug-obj2" material="src: #canvas" start>
+                <a-animation attribute="rotation" dur="9000" to="0 360 0" repeat="indefinite" easing="linear"></a-animation>
             </a-obj-model>
-        </a-marker>
-        <a-camera-static />
+       
     </a-scene>
     <div id="overlay">
         <p>Mug Colour:</p>
