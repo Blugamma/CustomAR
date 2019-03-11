@@ -26,6 +26,8 @@
 <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
 <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
 <script src="js/jscolor.js"></script>
 <script>
     THREEx.ArToolkitContext.baseURL = 'https://rawgit.com/jeromeetienne/ar.js/master/three.js/';
@@ -35,31 +37,71 @@
         display: none !important;
     }
 </style>
+
 <script>
     AFRAME.registerComponent('start', {
         init: function () {
+          
             this.canvas = document.getElementById('canvas');
-            this.ctx = canvas.getContext("2d");
+            this.ctx = this.canvas.getContext("2d");
+            this.devicePixelRatio = window.devicePixelRatio || 1;
+            this.backingStoreRatio = this.ctx.webkitBackingStorePixelRatio ||
+            this.ctx.mozBackingStorePixelRatio ||
+            this.ctx.msBackingStorePixelRatio ||
+            this.ctx.oBackingStorePixelRatio ||
+            this.ctx.backingStorePixelRatio || 1;
+
+            this.ratio = this.devicePixelRatio / this.backingStoreRatio;
+            if (this.devicePixelRatio !== this.backingStoreRatio){
+                var oldWidth = this.canvas.width;
+                var oldHeight = this.canvas.height;
+
+                this.canvas.width = oldWidth * this.ratio;
+                this.canvas.height = oldHeight * this.ratio;
+
+                this.canvas.style.width = oldWidth + 'px';
+                this.canvas.style.height = oldHeight + 'px';
+
+                this.ctx.scale(this.ratio, this.ratio);
+            }
             this.ctx.fillStyle = "white";
             this.ctx.fillRect(0, 0, 2448, 800);
-            this.ctx.font = "10px Arial";
+            this.ctx.font = "15px Arial";
             this.ctx.fillStyle = "black";
-            this.ctx.fillText("Text Here", 70, 100);
+            this.ctx.fillText("Text Here", 40, 100);
+     
+           
+            
             var personaliseBtn = document.getElementById("personalise");
             $(personaliseBtn).click(function () {
+                
                 var colorPicker = document.getElementById("jscolor");
                 var colorPickerValue = colorPicker.style.backgroundColor;
                 var textColorPicker = document.getElementById("textJscolor");
                 var textColorPickerValue = textColorPicker.style.backgroundColor;
                 var personalisedTxt = document.getElementById("personaliseTxt").value;
+                var imageUpload = document.getElementById("imageUpload");
+                var imageUrl = imageUpload.image.files[0].name; ;
+                
+                console.log(imageUrl);
+                var imageCreate = document.createElement("img");
+                imageCreate.setAttribute("src", imageUrl);
+                imageCreate.setAttribute("id", "canvasImage");
+                document.body.appendChild(imageCreate);
+
+                var canvasImage = document.getElementById("canvasImage");
                 this.canvas = document.getElementById('canvas');
                 this.ctx = canvas.getContext("2d");
                 this.ctx.fillStyle = colorPickerValue;
                 this.ctx.fillRect(0, 0, 2448, 800);
+                this.ctx.drawImage(canvasImage, 70, 30, 50, 50);
                 this.ctx.font = "10px Arial";
                 this.ctx.fillStyle = textColorPickerValue;
                 this.ctx.fillText(personalisedTxt, 70, 100);
+                
+                
             });
+
         }
     });
 </script>
@@ -90,12 +132,35 @@
         <button id="textJscolor" class="jscolor {width:243, height:150, position:'bottom',
             borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c', valueElement:null}"
             style="width:50px; height:20px;"></button>
+        <p>Image upload</p>
+        <form id="imageUpload" action="/imageUpload" method="post" enctype="multipart/form-data">
+            <input type="file" id="image" name="image" />
+            
+        
         <p>Personalised Text</p>
         <input id="personaliseTxt" type="text" />
-        <div id="personalise">
-            <p>Personalise</p>
+        <div >
+            <button id="personalise" type="submit">Personalise</button>
         </div>
+    </form>
+    
     </div>
+   <script>
+   $("#imageUpload").submit(function(e){
+                    e.preventDefault();
+     
+     var title = $('#image').val(); 
+     
+     $(this).ajaxSubmit({
+       data: {title: title},
+       contentType: 'application/json',
+       success: function(response){
+         console.log('image uploaded and form submitted');     
+       }
+   });
+     return false;
+});
+   </script>
 </body>
 
 </html>

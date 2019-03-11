@@ -124,8 +124,11 @@ header {
 }
 
 #personalise {
+    margin-top:20px;
     background-color: #38aa82;
     width: 150px;
+    border:0;
+    border-radius: 5px;
 }
 
 #personalise p {
@@ -135,6 +138,7 @@ header {
 
 #personalise:hover {
     cursor: pointer;
+    color: white;
 }
 
 #jscolor {
@@ -181,3 +185,4 @@ a:link {
 a:visited {
     text-decoration: none;
 }
+

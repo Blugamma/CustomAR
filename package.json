@@ -7,6 +7,7 @@
     "canvas": "^2.3.1",
     "express": "^4.16.4",
     "fs": "^0.0.1-security",
+    "multer": "^1.4.1",
     "security": "^1.0.0"
   },
   "devDependencies": {},
