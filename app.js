@@ -3,7 +3,7 @@ const app = express();
 const multer  = require('multer');
 const https = require('https');
 const fs = require('fs');
-const port = 8080;
+const port = process.env.PORT || 8080;
 app.use(express.static('public'));
 app.use(express.static('uploads'));
 
