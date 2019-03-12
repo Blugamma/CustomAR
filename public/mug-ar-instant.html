@@ -41,51 +41,69 @@
 <script>
     AFRAME.registerComponent('start', {
         init: function () {
-          
             this.canvas = document.getElementById('canvas');
             this.ctx = this.canvas.getContext("2d");
+
+            //Fix for blurry text on the canvas
             this.devicePixelRatio = window.devicePixelRatio || 1;
             this.backingStoreRatio = this.ctx.webkitBackingStorePixelRatio ||
             this.ctx.mozBackingStorePixelRatio ||
             this.ctx.msBackingStorePixelRatio ||
             this.ctx.oBackingStorePixelRatio ||
             this.ctx.backingStorePixelRatio || 1;
+
             this.ratio = this.devicePixelRatio / this.backingStoreRatio;
             if (this.devicePixelRatio !== this.backingStoreRatio){
                 var oldWidth = this.canvas.width;
                 var oldHeight = this.canvas.height;
+
                 this.canvas.width = oldWidth * this.ratio;
                 this.canvas.height = oldHeight * this.ratio;
+
                 this.canvas.style.width = oldWidth + 'px';
                 this.canvas.style.height = oldHeight + 'px';
+
                 this.ctx.scale(this.ratio, this.ratio);
             }
+
+            //Defaults for Canvas
             this.ctx.fillStyle = "white";
             this.ctx.fillRect(0, 0, 2448, 800);
             this.ctx.font = "15px Arial";
             this.ctx.fillStyle = "black";
             this.ctx.fillText("Text Here", 40, 100);
-     
-           
             
-            var personaliseBtn = document.getElementById("personalise");
-            $(personaliseBtn).click(function () {
-                
-                var colorPicker = document.getElementById("jscolor");
-                var colorPickerValue = colorPicker.style.backgroundColor;
-                var textColorPicker = document.getElementById("textJscolor");
-                var textColorPickerValue = textColorPicker.style.backgroundColor;
-                var personalisedTxt = document.getElementById("personaliseTxt").value;
-
+            //personalised overlay form checking for changes
+            $("#personaliseForm").change(function(e) {
                 this.canvas = document.getElementById('canvas');
                 this.ctx = canvas.getContext("2d");
+
+                //Variables for Canvas
+                var colorPicker = document.getElementById("mugJscolor");
+                var textColorPicker = document.getElementById("textJscolor");
+                var textColorPickerValue = textColorPicker.style.backgroundColor;
+                var colorPickerValue = colorPicker.style.backgroundColor;
+                var personalisedTxt = document.getElementById("personaliseTxt").value;   
+                var canvasImage = document.getElementById("image");
+                
+                //Background Color
                 this.ctx.fillStyle = colorPickerValue;
                 this.ctx.fillRect(0, 0, 2448, 800);
+                
+                //Image Canvas
+                var img = new Image();
+                img.onload = function(){
+                    this.canvas = document.getElementById('canvas');
+                    this.ctx = canvas.getContext("2d");
+                    this.ctx.drawImage(this, 70,30, 50, 50);
+                }
+                img.src = URL.createObjectURL(canvasImage.files[0]);
+  
+
+                //Font Canvas
                 this.ctx.font = "10px Arial";
                 this.ctx.fillStyle = textColorPickerValue;
                 this.ctx.fillText(personalisedTxt, 70, 100);
-                
-                
             });
         }
     });
@@ -102,28 +120,29 @@
             <canvas id="canvas"></canvas>
         </a-assets>
         <a-marker preset='hiro'>
-            <a-obj-model scale="0.02 0.02 0.02" src="#mug-obj2" material="src: #canvas" >
+            <a-obj-model scale="0.02 0.02 0.02" src="#mug-obj2" material="src: #canvas">
                 <!--<a-animation attribute="rotation" dur="9000" to="0 360 0" repeat="indefinite" easing="linear"></a-animation>-->
             </a-obj-model>
         </a-marker>
         <a-camera-static />
     </a-scene>
     <div id="overlay">
-        <p>Mug Colour:</p>
-        <button id="jscolor" class="jscolor {width:243, height:150, position:'bottom',
-        borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c', valueElement:null}"
-            style="width:50px; height:20px;"></button>
-        <p>Text Colour:</p>
-        <button id="textJscolor" class="jscolor {width:243, height:150, position:'bottom',
-            borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c', valueElement:null}"
-            style="width:50px; height:20px;"></button>            
-        
-        <p>Personalised Text</p>
-        <input id="personaliseTxt" type="text" />
-        <div >
-            <button id="personalise">Personalise</button>
-        </div>
-    
+        <form id="personaliseForm" action="/imageUpload" method="post" enctype="multipart/form-data">
+            <p>Mug Colour:</p>
+            <input id="mugJscolor" class="jscolor {valueElement:mugJscolor, width:243, height:150, position:'bottom',
+        borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c'}">
+
+            <p>Text Colour:</p>
+            <input id="textJscolor" class="jscolor {valueElement:textJscolor, width:243, height:150, position:'bottom',
+        borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c'}">
+
+            <p>Image upload</p>
+            <input type="file" id="image" name="image" />
+
+            <p>Personalised Text</p>
+            <input id="personaliseTxt" type="text" />
+        </form>
+
     </div>
 </body>
 
