@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
-body {
-    padding: 0;
+html, body {
     margin: 0;
+    height: 100%;
 }
 
 header {
@@ -14,6 +14,11 @@ header {
     float: left;
     padding-top: 10px;
     padding-left: 10px;
+}
+
+#main{
+    height: 100%;
+    width:100%;
 }
 
 .bar1,
@@ -98,7 +103,7 @@ header {
 .headerIcon {
     text-align: center;
     float: left;
-    width: 50%;
+    width: 33.3%;
 }
 
 .headerIcon i {
@@ -123,20 +128,23 @@ header {
     color: #38aa82;
 }
 
-#personalise {
+.btn {
+    display: block;
+    margin: auto;
     margin-top:20px;
     background-color: #38aa82;
     width: 150px;
     border:0;
     border-radius: 5px;
+    color: white !important;
 }
 
-#personalise p {
+.btn p {
     text-align: center;
-    color: white;
+    
 }
 
-#personalise:hover {
+.btn:hover {
     cursor: pointer;
     color: white;
 }
@@ -199,21 +207,48 @@ a:visited {
     cursor: pointer;
 }
 
-.dropdown {
-    position: relative;
-    display:block;
-    width:20px;
-}
-  
-.dropdown-content {
-    margin-top:-15px;
-display: none;
-position: absolute;
-background-color: #f1f1f1;
-min-width: 160px;
-box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-z-index: 1;
+#accountRegisterForm{
+    display:none;
+    position: absolute;
+    vertical-align: middle;
+    top:30%;
+    left:35%;
+    width: 30%;
+    height: 40%;
+    background-color: #19171c;
 }
 
+#closeForm{
+    float:right;
+    width: 20px;
+    text-align: center;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #38aa82;
+    margin:0;
+}
 
-.dropdown:hover .dropdown-content {display: block}
+#closeForm:hover{
+    cursor: pointer;
+}
+
+#registerInputs h3{
+    font-family: 'Open Sans', sans-serif;
+    color: #38aa82;
+    padding:0;
+    margin-top: 10px;
+    text-align: center;
+}
+
+#registerInputs{
+    margin:auto;
+    width:50%;
+}
+
+.registerInput{
+    margin-top:10%;
+    width:100%;
+    height: 20px;
+    padding: 5px;
+    border-radius: 5px;
+}

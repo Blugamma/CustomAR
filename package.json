@@ -4,9 +4,11 @@
   "description": "A way of personalising a product in Augmented Reality",
   "main": "app.js",
   "dependencies": {
+    "bcrypt": "^3.0.4",
     "canvas": "^2.3.1",
     "express": "^4.16.4",
     "fs": "^0.0.1-security",
+    "mongoose": "^5.4.19",
     "multer": "^1.4.1",
     "security": "^1.0.0"
   },
