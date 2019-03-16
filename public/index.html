@@ -30,9 +30,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 <script>
     THREEx.ArToolkitContext.baseURL = 'https://rawgit.com/jeromeetienne/ar.js/master/three.js/';
 </script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <script src="js/script.js"></script>
 
 <body>
@@ -50,18 +52,28 @@
     <div class="headerIcon"><i class="fas fa-shopping-cart"></i></div>
     <div id="accountIcon" class="headerIcon"><i class="fas fa-user-circle"></i></div>
   </div>
-  <div id="accountRegisterForm">
+  <div id="loadMenu">
+  <div id="accountForm">
+      <h3 id="registerTitle" style="background-color: #38aa82; color: white;">Register</h3><h3 id="loginTitle">Login</h3>
     <p id="closeForm">X</p>
     <div id="registerInputs">
     <form action="/register" method="POST">
-      <h3>Register</h3>
-    <input class="registerInput" type="text" id="username" name="username" placeholder="Username" required/>
+    <input class="registerInput" type="text" id="Rusername" name="username" placeholder="Username" required/>
     <input class="registerInput" type="email" id="email" name="email" placeholder="Email" required/>
-    <input class="registerInput" type="password" id="password" name="password" placeholder="Password" required/>
+    <input class="registerInput" type="password" id="Rpassword" name="password" placeholder="Password" required/>
     <button class="btn" type="submit">Register Now</button>
     </form> 
     </div>
+    <div id="loginInputs">
+        <form id="login" action="/login" method="POST">
+        <input class="loginInput" type="text" id="Lusername" name="username" placeholder="Username" required/>
+        <input class="loginInput" type="password" id="Lpassword" name="password" placeholder="Password" required/>
+        <div id="loginError"></div>
+        <button class="btn" type="submit">Login</button>
+        </form> 
+    </div>
   </div>
+</div>
 </header>
 <div id="main">
   <div class="product">
@@ -78,6 +90,11 @@
     <a href="#">Mug</a>
   </div>
   <script src="js/accounts.js"></script>
+  <script>
+     
+    
+    
+    </script>
 </body>
 
 </html>

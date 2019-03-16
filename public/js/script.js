@@ -1,3 +1,11 @@
+var accountIcon = document.getElementById("accountIcon");
+var closeForm = document.getElementById("closeForm");
+var mainArea = document.getElementById("main");
+var loginTitle = document.getElementById("loginTitle");
+var registerTitle = document.getElementById("registerTitle");
+var accountLoginForm = document.getElementById("accountForm");
+var registerForm = document.getElementById("registerInputs");
+var loginForm = document.getElementById("loginInputs");
 /* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
@@ -9,6 +17,44 @@ function openNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
   }
+
+  function getCookie(name)
+  {
+    var re = new RegExp(name + "=([^;]+)");
+    var value = re.exec(document.cookie);
+    return (value != null) ? unescape(value[1]) : null;
+  }
+  var loginState = getCookie('loginState');
+ 
+      console.log(loginState);
+
+  var socket = io.connect('/');
+    socket.on('loginError', function(data) {
+      
+      
+      if (loginState == "false"){
+        var loginTitle = document.getElementById("loginTitle");
+        var registerTitle = document.getElementById("registerTitle");
+        var accountLoginForm = document.getElementById("accountForm");
+        var registerForm = document.getElementById("registerInputs");
+        var loginForm = document.getElementById("loginInputs");
+        var loginError = document.getElementById("loginError");
+         
+          accountLoginForm.style = "display:block";
+          registerForm.style = "display:none";
+          loginForm.style = "display:block;"
+          loginTitle.style = "background-color: #38aa82; color: white;";
+          registerTitle.style = "background-color: none; color: #38aa82;";
+          loginError.innerHTML = data.message;
+      }
+
+      if (loginState == "true"){
+        var loginError = document.getElementById("loginError");
+        loginError.innerHTML = "";
+      }
+      
+    });
+
   
     //Mug canvas personalisation
     AFRAME.registerComponent('start', {

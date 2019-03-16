@@ -1,18 +1,24 @@
 const express = require('express');
 const app = express();
+const server = require('http').Server(app); 
+const io = require('socket.io')(server);
 /* const multer  = require('multer'); */
 const mongoose = require('mongoose');
-var bodyParser = require('body-parser')
+var bcrypt = require('bcrypt');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser')
 const https = require('https');
 const fs = require('fs');
 const port = 8080;
 app.use(express.static('public'));
 app.use(express.static('uploads'));
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+app.use(cookieParser());
+
 
 var User = require('./public/js/models/user');
 /* var storage = multer.diskStorage({
@@ -37,7 +43,7 @@ const upload = multer({
 });
 
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`App is listening to ${port}`);
 });
 
@@ -57,8 +63,32 @@ app.post('/register', function(req, res, err){
 
   newUserData.save(function(error, record){
     if (error) console.log(error);
-    console.log(record + " Successfully Uploaded!")
+    console.log(record + " Successfully Uploaded!");
   });
+
+});
+
+app.post('/login', function(req, res, err){
+  if (err) console.log(err);
+  User.findOne({username: req.body.username}, function(err, obj) { 
+    if (err) console.log(err);
+    const result = bcrypt.compareSync(req.body.password, obj.password);
+    if (result){
+      console.log("password is correct!");
+      res.cookie('loginState', 'true', { maxAge: 900000 });
+        
+ 
+      res.redirect("/");
+    } else {
+      io.on('connection', function(socket) {  
+        socket.emit('loginError', { message: 'username or password is incorrect!' });
+        
+    });
+    res.cookie('loginState', 'false', { maxAge: 900000 });
+    res.redirect("/")
+    }
+  });
+ 
 });
 
 
