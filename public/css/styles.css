@@ -266,7 +266,7 @@ a:visited {
     width:50%;
 }
 
-#loginError{
+.loginError{
     font-family: 'Open Sans', sans-serif;
     color:red;
     font-size: 10px;

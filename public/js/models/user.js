@@ -1,10 +1,15 @@
 var mongoose = require('mongoose');
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 var bcrypt = require('bcrypt');
+
 var newUser = mongoose.Schema({
-    username: String,
+    _id: Number,
+    name: String,
     email: String,
     password: String
-  });
+  }, { _id: false});
+  
+  newUser.plugin(AutoIncrement);
   
   newUser.pre('save', function(next) {
     var user = this;

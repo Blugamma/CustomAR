@@ -36,14 +36,5 @@ var loginForm = document.getElementById("loginInputs");
   });
 
 
-
-
-
-
-function resetMenuState() {
-    localStorage.removeItem('menu-state');
-}
-
-
   
 
