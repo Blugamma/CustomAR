@@ -6,6 +6,10 @@ var accountLoginForm = document.getElementById("accountForm");
 var registerForm = document.getElementById("registerInputs");
 var loginForm = document.getElementById("loginInputs");
 
+
+  
+
+
 function getCookie(name)
 {
   var re = new RegExp(name + "=([^;]+)");
@@ -72,35 +76,37 @@ var socket = io.connect('/');
       if (emailErrorCookie == "false"){
         var emailLoginError = document.getElementById("emailLoginError");
         emailLoginError.innerHTML = "";
-        emailRegError();
       }
     
   });
 
+  socket.on('emailRegError', function(data) {
+    if (emailRegErrorCookie == "true"){
+      var loginTitle = document.getElementById("loginTitle");
+      var registerTitle = document.getElementById("registerTitle");
+      var accountLoginForm = document.getElementById("accountForm");
+      var registerForm = document.getElementById("registerInputs");
+      var loginForm = document.getElementById("loginInputs");
+      var emailRegError = document.getElementById("emailRegError");
+       
+        accountLoginForm.style = "display:block";
+        registerForm.style = "display:block";
+        loginForm.style = "display:none;"
+        loginTitle.style = "background-color: none; color: #38aa82;";
+        registerTitle.style = "background-color: #38aa82; color: white;";
+        emailRegError.innerHTML = data.message ;
+        
+    }
   
-function emailRegError(){
-    socket.on('emailRegError', function(data) {
-        if (emailRegErrorCookie == "true"){
-          var loginTitle = document.getElementById("loginTitle");
-          var registerTitle = document.getElementById("registerTitle");
-          var accountLoginForm = document.getElementById("accountForm");
-          var registerForm = document.getElementById("registerInputs");
-          var loginForm = document.getElementById("loginInputs");
-          var emailRegError = document.getElementById("emailRegError");
-           
-            accountLoginForm.style = "display:block";
-            registerForm.style = "display:block";
-            loginForm.style = "display:none;"
-            loginTitle.style = "background-color: none; color: #38aa82;";
-            registerTitle.style = "background-color: #38aa82; color: white;";
-            emailRegError.innerHTML = data.message ;
-            
-        }
-      
-        if (emailRegErrorCookie == "false"){
-          var emailRegError = document.getElementById("emailRegError");
-          emailRegError.innerHTML = "";
-        }
-      
-      });
-}
+    if (emailRegErrorCookie == "false"){
+      var emailRegError = document.getElementById("emailRegError");
+      emailRegError.innerHTML = "";
+    }
+  
+  });
+
+
+  socket.on('loginMessage', function(data) {
+        var loginMessage = document.getElementById("loginMessage");
+        loginMessage.innerHTML = data.message;
+  });

@@ -6,18 +6,27 @@ const io = require('socket.io')(server);
 const mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser')
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var sess;
 const https = require('https');
 const fs = require('fs');
 const port = 8080;
-app.use(express.static('public'));
+app.use(express.static("public", {index: false}));
 app.use(express.static('uploads'));
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(session({
+  cookieName: 'session',
+  secret: 'random_string_goes_here',
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+}));
 // parse application/json
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
 
 
 var User = require('./public/js/models/user');
@@ -49,7 +58,12 @@ server.listen(port, () => {
 
 
 app.get('/',function(req,res) {
-    res.sendFile('index.html');
+  sess = req.session;
+  if (sess.email){
+    console.log("session has been started using " + req.session.email);
+   }
+    res.sendFile(__dirname + '/index.html');
+    
 });
 
 app.post('/register', function(req, res, err){
@@ -88,6 +102,7 @@ app.post('/register', function(req, res, err){
 });
 
 app.post('/login', function(req, res, err){
+  
   if (err) console.log(err);
   User.findOne({email: req.body.email}, function(err, obj) { 
     if (err) console.log(err);
@@ -104,10 +119,16 @@ app.post('/login', function(req, res, err){
     if (obj){
       const result = bcrypt.compareSync(req.body.password, obj.password);
       if (result){
+        sess = req.session;
+        sess.email = obj.email;
+        
+       
+        //console.log(sess);
         console.log("password is correct!");
         res.cookie('emailError', 'false', { maxAge: 900000 });
+        res.cookie('emailRegError', 'false', { maxAge: 900000 });
         res.cookie('passwordError', 'false', { maxAge: 900000 });
-        res.redirect("/");
+        res.redirect('/');
       } else {
         io.on('connection', function(socket) {  
           socket.emit('passwordLoginError', { message: 'Password is incorrect!' });
