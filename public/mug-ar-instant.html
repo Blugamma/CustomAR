@@ -28,11 +28,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
-<script src="js/jscolor.js"></script>
-<script src="js/script.js"></script>
-<script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+  <script>
     THREEx.ArToolkitContext.baseURL = 'https://rawgit.com/jeromeetienne/ar.js/master/three.js/';
-</script>
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+  <script src="js/Mainmenu.js"></script>
+  <script src="js/errorMessages.js"></script>
 <script src="js/personalisation.js"></script>
 <style>
     #arjsDebugUIContainer {
@@ -58,6 +60,9 @@
     </a-scene>
     <div id="overlay">
         <form id="personaliseForm" action="/personaliseFrom" method="post" enctype="multipart/form-data">
+            <div id="canvasPreset" style="display: none;">
+                
+            </div>
             <p>Mug Colour:</p>
             <input id="mugJscolor" class="jscolor {valueElement:mugJscolor, width:243, height:150, position:'bottom',
         borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c'}">
@@ -83,6 +88,7 @@
         </form>
 
     </div>
+   
 </body>
 
 </html>

@@ -208,7 +208,6 @@ a:visited {
 }
 
 #accountForm{
-    display:none;
     position: absolute;
     vertical-align: middle;
     top:30%;
@@ -270,4 +269,8 @@ a:visited {
     font-family: 'Open Sans', sans-serif;
     color:red;
     font-size: 10px;
+}
+
+#accountIcon:hover{
+cursor: pointer;
 }

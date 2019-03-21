@@ -36,5 +36,34 @@ var loginForm = document.getElementById("loginInputs");
   });
 
 
+  var loginState = getCookie('loginState');
+
+  if (loginState == "true"){
+    console.log("logged in");
+    var loginMessage = document.getElementById("loginMessage");
+    var accountIcon = document.getElementById('accountIcon');
+    accountIcon.innerHTML = '<a href="/logout"><i class="fas fa-sign-out-alt"></i></a>';
+    $(accountIcon).click(function(){
+      accountLoginForm.style = "display:none";
+    });
+  }
+  else{
+    console.log("logged out");
+  var loginMessage = document.getElementById("loginMessage");
+  var accountIcon = document.getElementById('accountIcon');
+  accountIcon.innerHTML = '<i class="fas fa-user-circle"></i>';
+  $(accountIcon).click(function(){
+    console.log("Open");
+    accountLoginForm.style = "display:block";
+  });
+  }
+    
   
+
+
+  
+ 
+
+
+
 
