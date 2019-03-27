@@ -1,0 +1,64 @@
+html
+  head
+    title Mug AR Personalisation
+    link(rel='stylesheet', type='text/css', href='css/styles.css')
+    link(rel='apple-touch-icon', sizes='57x57', href='images/apple-icon-57x57.png')
+    link(rel='apple-touch-icon', sizes='60x60', href='images/apple-icon-60x60.png')
+    link(rel='apple-touch-icon', sizes='72x72', href='images/apple-icon-72x72.png')
+    link(rel='apple-touch-icon', sizes='76x76', href='images/apple-icon-76x76.png')
+    link(rel='apple-touch-icon', sizes='114x114', href='images/apple-icon-114x114.png')
+    link(rel='apple-touch-icon', sizes='120x120', href='images/apple-icon-120x120.png')
+    link(rel='apple-touch-icon', sizes='144x144', href='images/apple-icon-144x144.png')
+    link(rel='apple-touch-icon', sizes='152x152', href='images/apple-icon-152x152.png')
+    link(rel='apple-touch-icon', sizes='180x180', href='images/apple-icon-180x180.png')
+    link(rel='icon', type='image/png', sizes='192x192', href='images/android-icon-192x192.png')
+    link(rel='icon', type='image/png', sizes='32x32', href='images/favicon-32x32.png')
+    link(rel='icon', type='image/png', sizes='96x96', href='images/favicon-96x96.png')
+    link(rel='icon', type='image/png', sizes='16x16', href='images/favicon-16x16.png')
+    link(rel='manifest', href='images/manifest.json')
+    meta(name='msapplication-TileColor', content='#ffffff')
+    meta(name='msapplication-TileImage', content='images/ms-icon-144x144.png')
+    meta(name='theme-color', content='#ffffff')
+    meta(name='viewport', content='width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0')
+    script(src='//cdn.8thwall.com/web/aframe/8frame-0.8.2.min.js')
+    script(src='//cdn.8thwall.com/web/xrextras/xrextras.js')
+    script(async='', src='//apps.8thwall.com/xrweb?appKey=5vdXBAyadNFIsmV8CJerW6wobuwlcEAhdglAM3HbMuIaJEY0nmxMHSRQusGautFmkDNi7X')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js')
+    script(src='js/cookies.js')
+    script(src='js/Mainmenu.js')
+    script(src='js/errorMessages.js')
+    script(src='js/jscolor.js')
+    style.
+      #arjsDebugUIContainer {
+      display: none !important;
+      }
+  body
+    a-scene(xrweb='', xrextras-tap-recenter='', xrextras-almost-there='', xrextras-loading='', xrextras-runtime-error='', start='')
+      a-camera(position='0 8 8')
+      a-assets
+        a-asset-item#mug-mtl(src='3Dmodels/mug/coffeMug1_free_obj.mtl')
+        a-asset-item#mug-obj(src='3Dmodels/mug/coffeMug1_free_obj.obj')
+        a-asset-item#cushion-obj(src='3Dmodels/cushion/pillow.obj')
+        a-asset-item#cushion-mtl(src='3Dmodels/cushion/pillow.mtl')
+        canvas#canvas
+      a-obj-model(scale=scale, src=model, rotation=rotation, material='src: #canvas')
+        //a-animation(attribute='rotation', dur='9000', to='0 360 0', repeat='indefinite', easing='linear')
+    #overlay
+      form#personaliseForm(action='/personaliseFrom', method='post', enctype='multipart/form-data')
+        #canvasPreset(style='display: none;')
+          input#personaliseTxt2(type='text')
+        p= modelName
+        input#mugJscolor.jscolor(class="{valueElement:mugJscolor, width:243, height:150, position:'bottom', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c'}")
+        p Image upload
+        input#image(type='file', name='image')
+        p Personalised Text
+        input#personaliseTxt(type='text')
+        p Text Colour:
+        input#textJscolor.jscolor(class="{valueElement:textJscolor, width:243, height:150, position:'bottom', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c'}")
+        p Font Size:
+        select#fontSize
+          option.fontSize(value='14') 14
+          option(value='16') 16
+          option(value='18') 18
+          option(value='30') 30
+script(src='js/personalisation.js')

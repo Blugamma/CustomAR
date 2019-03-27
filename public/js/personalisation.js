@@ -11,10 +11,10 @@ var url = getUrlVars()["model"];
 AFRAME.registerComponent('start', {
   init: function () {
     this.canvas = document.getElementById('canvas');
-   
-      this.canvas.width = 2448;
-      this.canvas.height = 800;
-    
+
+    this.canvas.width = 2448;
+    this.canvas.height = 800;
+
 
     this.ctx = this.canvas.getContext("2d");
 
@@ -81,10 +81,10 @@ AFRAME.registerComponent('start', {
         this.canvas = document.getElementById('canvas');
         this.ctx = canvas.getContext("2d");
         if (url == "cushion") {
-          this.ctx.drawImage(this, 1100, 400, this.canvas.width / 12, this.canvas.height / 10);
-        } 
+          this.ctx.drawImage(this, 1100, 400, 480 / 2, 480 / 5);
+        }
         if (url == "mug") {
-          this.ctx.drawImage(this, 300, 110,  this.canvas.width / 6, this.canvas.height / 2);
+          this.ctx.drawImage(this, 300, 110, 480, 480);
         }
 
       }
@@ -99,18 +99,18 @@ AFRAME.registerComponent('start', {
       var fontSize = document.getElementById("fontSize").value;
       console.log(fontSize);
       //Font Canvas
-      
+
       this.ctx.fillStyle = textColorPickerValue;
       if (url == "cushion") {
         this.ctx.font = fontSize + "px" + " Arial";
         this.ctx.fillText(personalisedTxt, 1190, 525);
-      } 
+      }
       if (url == "mug") {
-        this.ctx.font = fontSize*4 + "px" + " Arial";
+        this.ctx.font = fontSize * 4 + "px" + " Arial";
         this.ctx.fillText(personalisedTxt, 500, 700);
       }
 
-      
+
 
 
 

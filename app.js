@@ -5,6 +5,7 @@ const io = require('socket.io')(server);
 /* const multer  = require('multer'); */
 const mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+var device = require('express-device');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
@@ -12,6 +13,7 @@ var sess;
 const https = require('https');
 const fs = require('fs');
 const port = 8080;
+app.use(device.capture());
 app.use(express.static("public", {
   index: false
 }));
@@ -81,14 +83,45 @@ app.get('/logout', function (req, res) {
 });
 
 app.get('/personalisation', function (req, res, err) {
+  var deviceType = req.device.type;
   var modelId = req.query.model;
-  if (modelId == "mug"){
-    res.render('mug-ar-instant', { model: '#mug-obj', scale: '0.02 0.02 0.02', rotation: '0 260 0' });
+  if (deviceType == "desktop") {
+    if (modelId == "mug") {
+      res.render('personalisation-marker', {
+        model: '#mug-obj',
+        scale: '0.02 0.02 0.02',
+        rotation: '0 260 0',
+        modelName: 'Mug Colour:'
+      });
+    }
+    if (modelId == "cushion") {
+      res.render('personalisation-marker', {
+        model: '#cushion-obj',
+        scale: '0.1 0.1 0.1',
+        rotation: '-90 0 0',
+        modelName: 'Cushion Colour:'
+      });
+    }
+  } else if (deviceType == "phone") {
+    if (modelId == "mug") {
+      res.render('personalisation-markerless', {
+        model: '#mug-obj',
+        scale: '0.07 0.07 0.07',
+        rotation: '0 260 0',
+        modelName: 'Mug Colour:'
+      });
+    }
+    if (modelId == "cushion") {
+      res.render('personalisation-markerless', {
+        model: '#cushion-obj',
+        scale: '0.1 0.1 0.1',
+        rotation: '-90 0 0',
+        modelName: 'Cushion Colour:'
+      });
+    }
   }
-  if (modelId == "cushion"){
-    res.render('mug-ar-instant', { model: '#cushion-obj', scale: '0.1 0.1 0.1', rotation: '-90 0 0' });
-  }
-    
+
+
 
 
 });

@@ -53,14 +53,14 @@ html
       form#personaliseForm(action='/personaliseFrom', method='post', enctype='multipart/form-data')
         #canvasPreset(style='display: none;')
           input#personaliseTxt2(type='text')
-        p Mug Colour:
+        p= modelName
         input#mugJscolor.jscolor(class="{valueElement:mugJscolor, width:243, height:150, position:'bottom', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c'}")
-        p Text Colour:
-        input#textJscolor.jscolor(class="{valueElement:textJscolor, width:243, height:150, position:'bottom', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c'}")
         p Image upload
         input#image(type='file', name='image')
         p Personalised Text
         input#personaliseTxt(type='text')
+        p Text Colour:
+        input#textJscolor.jscolor(class="{valueElement:textJscolor, width:243, height:150, position:'bottom', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c'}")
         p Font Size:
         select#fontSize
           option.fontSize(value='14') 14
