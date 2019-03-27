@@ -14,8 +14,6 @@ AFRAME.registerComponent('start', {
 
     this.canvas.width = 2448;
     this.canvas.height = 800;
-
-
     this.ctx = this.canvas.getContext("2d");
 
     //Fix for blurry text on the canvas
@@ -40,19 +38,12 @@ AFRAME.registerComponent('start', {
       this.ctx.scale(this.ratio, this.ratio);
     }
 
-
-
-
     //Defaults for Canvas
     this.ctx.fillStyle = "white";
     this.ctx.fillRect(0, 0, 2448, 800);
 
     this.ctx.fillStyle = "black";
     this.ctx.fillText("Text Here", 40, 100);
-
-
-
-
 
     //personalised overlay form checking for changes
     $("#personaliseForm").change(function () {
@@ -66,14 +57,11 @@ AFRAME.registerComponent('start', {
       var colorPickerValue = colorPicker.style.backgroundColor;
       var personalisedTxt = document.getElementById("personaliseTxt").value;
 
-
       //Background Color
       this.ctx.fillStyle = colorPickerValue;
       this.ctx.fillRect(0, 0, 2448, 800);
 
-
       //Image Canvas
-
       console.log(url);
       var img = new Image();
       var canvasImage = document.getElementById("image");
@@ -94,12 +82,10 @@ AFRAME.registerComponent('start', {
         console.log("image not selected");
       }
 
-
       //Font Size
       var fontSize = document.getElementById("fontSize").value;
       console.log(fontSize);
       //Font Canvas
-
       this.ctx.fillStyle = textColorPickerValue;
       if (url == "cushion") {
         this.ctx.font = fontSize + "px" + " Arial";
@@ -109,15 +95,9 @@ AFRAME.registerComponent('start', {
         this.ctx.font = fontSize * 4 + "px" + " Arial";
         this.ctx.fillText(personalisedTxt, 500, 700);
       }
-
-
-
-
-
     });
   }
 });
-
 
 var loginState = getCookie('loginState');
 if (loginState == "true") {
