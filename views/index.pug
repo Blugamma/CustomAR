@@ -41,12 +41,9 @@ html
       #logo
         img(src='images/logo.png')
       .headerIcons
-        .headerIcon
-          i.fas.fa-search
-        .headerIcon
-          i.fas.fa-shopping-cart
         #accountIcon.headerIcon
           i.fas.fa-user-circle
+      #loginMessage= message
       #loadMenu
         #accountForm(style='display:none;')
           h3#registerTitle(style='background-color: #38aa82; color: white;') Register
@@ -67,17 +64,26 @@ html
               #passwordLoginError.loginError
               button.btn(type='submit') Login
     #main
-      #loginMessage= message
       .product
-        #productImage
-          img(src='https://static.turbosquid.com/Preview/2014/05/25__17_25_41/cm06.jpgef5ebf5c-557a-4eab-a1d8-a7132cb66996Larger.jpg')
+        img.productImage(src='images/mug1.jpg')
+        p.productTitle Personalised Mug
         a(href='/personalisation?model=mug')
           p.ArBtn Personalise in AR
       .product
-        #productImage
-          img(src='NUS Extra ID.jpg')
+        img.productImage(src='images/pillow1.jpg')
+        p.productTitle Personalised Pillow Case
         a(href='/personalisation?model=cushion')
           p.ArBtn Personalise in AR
+      .product
+        img.productImage(src='images/pillow1.jpg')
+        p.productTitle Personalised Pillow Case
+        a(href='/personalisation?model=cushion')
+          p.ArBtn Personalise in AR
+      .product
+        img.productImage(src='images/pillow1.jpg')
+        p.productTitle Personalised Pillow Case
+        a(href='/personalisation?model=cushion')
+          p.ArBtn Personalise in AR    
     #mySidenav.sidenav
       a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
       a(href='#') Mug

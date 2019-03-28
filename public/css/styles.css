@@ -2,281 +2,336 @@
 
 html,
 body {
-    margin: 0;
-    height: 100%;
+	margin: 0;
+	height: 100%;
 }
 
 header {
-    background-color: #19171c;
-    height: 60px;
+	background-color: #19171c;
+	height: 60px;
 }
 
 #menu {
-    float: left;
-    padding-top: 10px;
-    padding-left: 10px;
+	float: left;
+	padding-top: 10px;
+	padding-left: 10px;
 }
 
 #main {
-    height: 100%;
-    width: 100%;
+	height: 100%;
+	width: 100%;
 }
 
 .bar1,
 .bar2,
 .bar3 {
-    width: 30px;
-    height: 3px;
-    background-color: #38aa82;
-    margin: 7px 0;
+	width: 30px;
+	height: 3px;
+	background-color: #38aa82;
+	margin: 7px 0;
 }
 
 #menu:hover {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 60px;
-    left: 0;
-    background-color: #19171c;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 1;
+	top: 60px;
+	left: 0;
+	background-color: #19171c;
+	overflow-x: hidden;
+	transition: 0.5s;
+	padding-top: 60px;
 }
 
 .sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-    font-family: 'Open Sans', sans-serif;
-    color: #38aa82;
+	padding: 8px 8px 8px 32px;
+	text-decoration: none;
+	font-size: 25px;
+	color: #818181;
+	display: block;
+	transition: 0.3s;
+	font-family: 'Open Sans', sans-serif;
+	color: #38aa82;
 }
 
 .sidenav a:hover {
-    color: #f1f1f1;
+	color: #f1f1f1;
 }
 
 .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
+	position: absolute;
+	top: 0;
+	right: 25px;
+	font-size: 36px;
+	margin-left: 50px;
 }
 
 #logo {
-    padding-top: 12px;
-    float: left;
-    width: 50%;
+	padding-top: 12px;
+	float: left;
+	width: 70px;
 }
 
 #logo img {
-    float: left;
-    margin-top: -5px;
-    padding-left: 5px;
-    width: 45px;
-    height: 45px;
+	float: left;
+	margin-top: -5px;
+	padding-left: 5px;
+	width: 45px;
+	height: 45px;
 }
 
 #logo h1 {
-    padding-left: 10px;
-    margin: 0;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 25px;
-    font-weight: 100;
-    color: #38aa82;
-    float: left;
+	padding-left: 10px;
+	margin: 0;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 25px;
+	font-weight: 100;
+	color: #38aa82;
+	float: left;
 }
 
 .headerIcons {
-    margin-top: 15px;
-    float: right;
-    width: 20%;
+	margin-top: 15px;
+	float: right;
+	width: 50px;
 }
 
 .headerIcon {
-    text-align: center;
-    float: left;
-    width: 33.3%;
+	text-align: center;
+	float: right;
+	padding-right: 10px;
+	/*width: 33.3%;*/
 }
 
 .headerIcon i {
-    color: #38aa82;
-    font-size: 25px;
+	color: #38aa82;
+	font-size: 25px;
 }
 
 #overlay {
-    position: absolute;
-    top: 10px;
-    background-color: #19171c;
-    width: 200px;
-    border-radius: 10px;
-    left: 10px;
-    padding-left: 10px;
+	position: absolute;
+	top: 10px;
+	background-color: #19171c;
+	width: 200px;
+	border-radius: 10px;
+	left: 10px;
+	padding-left: 10px;
 }
 
 #overlay p {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 100;
-    color: #38aa82;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 15px;
+	font-weight: 100;
+	color: #38aa82;
 }
 
 .btn {
-    display: block;
-    margin: auto;
-    margin-top: 20px;
-    background-color: #38aa82;
-    width: 150px;
-    border: 0;
-    border-radius: 5px;
-    color: white !important;
+	display: block;
+	margin: auto;
+	margin-top: 20px;
+	background-color: #38aa82;
+	width: 150px;
+	border: 0;
+	border-radius: 5px;
+	color: white !important;
 }
 
 .btn p {
-    text-align: center;
-
+	text-align: center;
 }
 
 .btn:hover {
-    cursor: pointer;
-    color: white;
+	cursor: pointer;
+	color: white;
 }
 
 #jscolor {
-    border: 0;
+	border: 0;
 }
 
 .product {
-    width: 25%;
-    padding: 10px;
+	display: inline-block;
+	width: 33.33%;
 }
 
-#productImage {
-    margin: 0 auto;
-    width: 450px;
-    height: auto;
-    display: block;
+.productImage {
+	margin: auto;
+	height: auto;
+	display: block;
+	padding-bottom: 10px;
+}
+
+.productTitle {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	color: #19171c;
+	text-align: center;
 }
 
 .ArBtn {
-    width: 200px;
-    text-decoration: none !important;
-    background-color: #19171c;
-    color: #38aa82;
-    height: 30px;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 100;
-    border-radius: 5px;
-    text-align: center;
-    padding-top: 6px;
-    margin: 0 auto;
+	width: 50%;
+	text-decoration: none !important;
+	background-color: #19171c;
+	color: #38aa82;
+	height: 30px;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 15px;
+	font-weight: 100;
+	border-radius: 5px;
+	text-align: center;
+	padding-top: 6px;
+	display: block;
+	margin: 0 auto;
 }
 
 .ArBtn:hover {
-    cursor: pointer;
-    background-color: #38aa82;
-    color: #19171c;
+	cursor: pointer;
+	background-color: #38aa82;
+	color: #19171c;
 }
 
 a:link {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 a:visited {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 .fontSize {
-    background-color: #38aa82;
-    color: white !important;
-    width: 40px;
-    text-align: center;
-    padding: 5px;
-    display: inline-block;
+	background-color: #38aa82;
+	color: white !important;
+	width: 40px;
+	text-align: center;
+	padding: 5px;
+	display: inline-block;
 }
 
 .fontSize:hover {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 #accountForm {
-    position: absolute;
-    vertical-align: middle;
-    top: 30%;
-    left: 35%;
-    width: 30%;
-    height: 40%;
-    background-color: #19171c;
+	position: absolute;
+	vertical-align: middle;
+	top: 30%;
+	left: 35%;
+	width: 30%;
+	height: auto;
+	padding-bottom: 10px;
+	background-color: #19171c;
+	border: 5px solid #38aa82;
 }
 
 #closeForm {
-    float: right;
-    width: 20px;
-    text-align: center;
-    color: white;
-    font-family: 'Open Sans', sans-serif;
-    background-color: #38aa82;
-    margin: 0;
+	float: right;
+	width: 20px;
+	text-align: center;
+	color: white;
+	font-family: 'Open Sans', sans-serif;
+	background-color: #38aa82;
+	margin: 0;
 }
 
 #closeForm:hover {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 #accountForm h3 {
-    font-family: 'Open Sans', sans-serif;
-    color: #38aa82;
-    padding: 0;
-    margin-top: 10px;
-    display: inline-block;
-    text-align: center;
-    width: 45%;
+	font-family: 'Open Sans', sans-serif;
+	color: #38aa82;
+	padding: 0;
+	margin-top: 10px;
+	display: inline-block;
+	text-align: center;
+	width: 45%;
 }
 
 #accountForm h3:hover {
-    cursor: pointer;
+	cursor: pointer;
 }
 
-
 #registerInputs {
-    margin: auto;
-    width: 50%;
+	margin: auto;
+	width: 50%;
 }
 
 .registerInput,
 .loginInput {
-    margin-top: 10%;
-    width: 100%;
-    height: 20px;
-    padding: 5px;
-    border-radius: 5px;
+	margin-top: 10%;
+	width: 100%;
+	height: 20px;
+	padding: 5px;
+	border-radius: 5px;
 }
 
 #loginInputs {
-    display: none;
-    margin: auto;
-    width: 50%;
+	display: none;
+	margin: auto;
+	width: 50%;
 }
 
 .loginError {
-    font-family: 'Open Sans', sans-serif;
-    color: red;
-    font-size: 10px;
+	font-family: 'Open Sans', sans-serif;
+	color: red;
+	font-size: 10px;
+}
+
+#loginMessage {
+	padding-top: 17px;
+	float: right;
+	font-family: 'Open Sans', sans-serif;
+	color: #38aa82;
+	font-size: 15px;
 }
 
 #accountIcon:hover {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 #arjsDebugUIContainer {
-    display: none !important;
+	display: none !important;
+}
+
+@media only screen and (max-width: 1200px) {
+	.product {
+		padding-top: 10px;
+		width: 50%;
+	}
+
+	#accountForm {
+		width: 50%;
+		left: 25%;
+		height: auto;
+		padding-bottom: 10px;
+	}
+}
+
+@media only screen and (max-width: 815px) {
+	.product {
+		width: 100%;
+	}
+
+	.ArBtn {
+		width: 30%;
+	}
+
+	#accountForm {
+		width: 90%;
+		left: 5%;
+		height: auto;
+		padding-bottom: 10px;
+	}
+}
+
+@media only screen and (max-width: 662px) {
+	.ArBtn {
+		width: 50%;
+	}
 }
