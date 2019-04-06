@@ -315,6 +315,11 @@ a:visited {
 	margin: auto;
 }
 
+#personaliseNow {
+	width: 60%;
+	margin-left: 60px;
+}
+
 #saveDesign {
 	margin-top: 20px;
 }
