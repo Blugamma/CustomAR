@@ -16,6 +16,7 @@ html
     link(rel='icon', type='image/png', sizes='96x96', href='images/favicon-96x96.png')
     link(rel='icon', type='image/png', sizes='16x16', href='images/favicon-16x16.png')
     link(rel='manifest', href='images/manifest.json')
+    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.7.2/css/all.css', integrity='sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr', crossorigin='anonymous')
     meta(name='msapplication-TileColor', content='#ffffff')
     meta(name='msapplication-TileImage', content='images/ms-icon-144x144.png')
     meta(name='theme-color', content='#ffffff')
@@ -45,22 +46,33 @@ html
         a-obj-model(scale=scale, src=model, rotation=rotation, material="src: #canvas")
           // <a-animation attribute="rotation" dur="9000" to="0 360 0" repeat="indefinite" easing="linear"></a-animation>
       a-camera-static
+      
     #overlay
-      form#personaliseForm(action='/personaliseFrom', method='post', enctype='multipart/form-data')
+      p.btn#personaliseNow Show Personalise Menu
+      form#personaliseForm(action='/personaliseForm', method='POST')
         #canvasPreset(style='display: none;')
-          input#personaliseTxt2(type='text')
+        P Personal Presets
+          select#canvasPresets(style="display:block", name="canvasPresets")
+            option(value='14') 14
+            option(value='16') 16
+            option(value='18') 18
+            option(value='30') 30
         p= modelName
-        input#mugJscolor.jscolor(class="{valueElement:mugJscolor, width:243, height:150, position:'bottom', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c'}")
+        input#mugJscolor.jscolor(class="{valueElement:mugJscolor, width:243, height:150, position:'bottom', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c'}", name="modelColour")
         p Image upload
-        input#image(type='file', name='image')
+        input#image(type='file', name='image', required)
         p Personalised Text
-        input#personaliseTxt(type='text')
+        input#personaliseTxt(type='text', name="personalText", required)
         p Text Colour:
-        input#textJscolor.jscolor(class="{valueElement:textJscolor, width:243, height:150, position:'bottom', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c'}")
+        input#textJscolor.jscolor(class="{valueElement:textJscolor, width:243, height:150, position:'bottom', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c'}", name="textColour")
         p Font Size:
-        select#fontSize
+        select#fontSize(name="fontSize")
           option.fontSize(value='14') 14
           option(value='16') 16
           option(value='18') 18
           option(value='30') 30
+        input#nameOfDesign(placeholder="Name of Design", name="nameOfDesign", required)
+        button.btn#saveDesign(style='display: none;', type="submit") Save Design
+script(src='js/accountForm.js')
+script(src='js/errorMessages.js')
 script(src='js/personalisation.js')
