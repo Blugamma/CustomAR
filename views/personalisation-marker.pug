@@ -51,7 +51,7 @@ html
       p.btn#personaliseNow Show Personalise Menu
       form#personaliseForm(action='/personaliseForm', method='POST')
         #canvasPreset(style='display: none;')
-        P Personal Presets
+        P Personal Presets:
           select#canvasPresets(style="display:block", name="canvasPresets")
             option(value='14') 14
             option(value='16') 16
@@ -61,8 +61,7 @@ html
         input#mugJscolor.jscolor(class="{valueElement:mugJscolor, width:243, height:150, position:'bottom', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c'}", name="modelColour")
         p Image upload
         input#image(type='file', name='image', required)
-        p Personalised Text
-        input#personaliseTxt(type='text', name="personalText", required)
+        input#personaliseTxt(placeholder="Personalised Text", type='text', name="personalText", required)
         p Text Colour:
         input#textJscolor.jscolor(class="{valueElement:textJscolor, width:243, height:150, position:'bottom', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c'}", name="textColour")
         p Font Size:

@@ -319,6 +319,10 @@ a:visited {
 	margin-top: 20px;
 }
 
+#personaliseTxt {
+	margin-top: 20px;
+}
+
 @media only screen and (max-width: 1200px) {
 	.product {
 		padding-top: 10px;
