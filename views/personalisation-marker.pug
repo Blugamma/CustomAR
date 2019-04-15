@@ -34,6 +34,7 @@ html
     script(src='js/Mainmenu.js')
     script(src='js/errorMessages.js')
     script(src='js/jscolor.js')
+    - var loginState = "true";
   body
     a-scene(start='', embedded='', arjs='')
       a-assets
@@ -46,19 +47,18 @@ html
         a-obj-model(scale=scale, src=model, rotation=rotation, material="src: #canvas")
           // <a-animation attribute="rotation" dur="9000" to="0 360 0" repeat="indefinite" easing="linear"></a-animation>
       a-camera-static
-      
+
     #overlay
       #logo
         img(src='images/logo.png')
       p.btn#personaliseNow Show Personalise Menu
       form#personaliseForm(action='/personaliseForm', method='POST')
         #canvasPreset(style='display: none;')
-        P Personal Presets:
-          select#canvasPresets(style="display:block", name="canvasPresets")
-            option(value='14') 14
-            option(value='16') 16
-            option(value='18') 18
-            option(value='30') 30
+          p Personal Presets:
+            select#canvasPresets(style="display:block", name="canvasPresets")
+              if presets != underfiend
+                each preset in presets
+                  option=preset
         p= modelName
         input#mugJscolor.jscolor(class="{valueElement:mugJscolor, width:243, height:150, position:'bottom', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c'}", name="modelColour")
         p Image upload

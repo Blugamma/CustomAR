@@ -1,6 +1,6 @@
 function getUrlVars() {
 	var vars = {};
-	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
 		vars[key] = value;
 	});
 	return vars;
@@ -9,7 +9,7 @@ function getUrlVars() {
 var url = getUrlVars()['model'];
 //Mug canvas personalisation
 AFRAME.registerComponent('start', {
-	init: function() {
+	init: function () {
 		this.canvas = document.getElementById('canvas');
 
 		this.canvas.width = 2448;
@@ -48,7 +48,7 @@ AFRAME.registerComponent('start', {
 		this.ctx.fillText('Text Here', 40, 100);
 
 		//personalised overlay form checking for changes
-		$('#personaliseForm').change(function() {
+		$('#personaliseForm').change(function () {
 			this.canvas = document.getElementById('canvas');
 			this.ctx = canvas.getContext('2d');
 
@@ -67,7 +67,7 @@ AFRAME.registerComponent('start', {
 			console.log(url);
 			var img = new Image();
 			var canvasImage = document.getElementById('image');
-			img.onload = function() {
+			img.onload = function () {
 				this.canvas = document.getElementById('canvas');
 				this.ctx = canvas.getContext('2d');
 				if (url == 'cushion') {
@@ -113,7 +113,7 @@ var personaliseNow = document.getElementById('personaliseNow');
 var canvasForm = document.getElementById('personaliseForm');
 
 var clicked = false;
-$(personaliseNow).click(function() {
+$(personaliseNow).click(function () {
 	if (clicked == false) {
 		personaliseNow.innerHTML = 'Hide Personalise Menu';
 		canvasForm.style = 'display:block';
