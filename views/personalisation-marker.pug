@@ -51,13 +51,13 @@ html
       #logo
         img(src='images/logo.png')
       p.btn#personaliseNow Show Personalise Menu
-      form#personaliseForm(action='/personaliseForm', method='POST')
+      form#personaliseForm(action='/personaliseForm', method='POST', enctype="multipart/form-data")
         #canvasPreset(style='display: none;')
-          p Personal Presets:
-            select#canvasPresets(style="display:block", name="canvasPresets")
-              if presets != underfiend
-                each preset in presets
-                  option=preset
+        p Personal Presets:
+          select#canvasPresets(style="display:block", name="canvasPresets")
+            if presets != underfiend
+              each preset in presets
+                option=preset
         p= modelName
         input#mugJscolor.jscolor(class="{valueElement:mugJscolor, width:243, height:150, position:'bottom', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c'}", name="modelColour")
         p Image upload
@@ -75,5 +75,5 @@ html
         button.btn#saveDesign(style='display: none;', type="submit") Save Design
 script(src='js/accountForm.js')
 script(src='js/errorMessages.js')
-script(src='js/personalPresets.js')
 script(src='js/personalisation.js')
+script(src='js/personalPresets.js')

@@ -1,6 +1,6 @@
 function getUrlVars() {
 	var vars = {};
-	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
 		vars[key] = value;
 	});
 	return vars;
@@ -9,7 +9,7 @@ function getUrlVars() {
 var url = getUrlVars()['model'];
 //Mug canvas personalisation
 AFRAME.registerComponent('start', {
-	init: function () {
+	init: function() {
 		this.canvas = document.getElementById('canvas');
 
 		this.canvas.width = 2448;
@@ -48,7 +48,7 @@ AFRAME.registerComponent('start', {
 		this.ctx.fillText('Text Here', 40, 100);
 
 		//personalised overlay form checking for changes
-		$('#personaliseForm').change(function () {
+		$('#personaliseForm').change(function() {
 			this.canvas = document.getElementById('canvas');
 			this.ctx = canvas.getContext('2d');
 
@@ -67,7 +67,7 @@ AFRAME.registerComponent('start', {
 			console.log(url);
 			var img = new Image();
 			var canvasImage = document.getElementById('image');
-			img.onload = function () {
+			img.onload = function() {
 				this.canvas = document.getElementById('canvas');
 				this.ctx = canvas.getContext('2d');
 				if (url == 'cushion') {
@@ -82,6 +82,20 @@ AFRAME.registerComponent('start', {
 			} else {
 				console.log('image not selected');
 			}
+			var personalPreset = document.getElementById('canvasPresets');
+			var personalPresetValue = personalPreset.options[personalPreset.selectedIndex].value;
+			$.getJSON(
+				'https://api.mlab.com/api/1/databases/personalisar/collections/personalcanvas?apiKey=QcMYUxzSPh1UFvwhGMNJHciyVqHemZmC',
+				function(json) {
+					for (var i = 0; i < json.length; i++) {
+						var nameofDesign = json[i].nameOfDesign;
+						if (nameofDesign == personalPresetValue) {
+							img.src = json[i].image;
+							console.log(json[i].image);
+						}
+					}
+				}
+			);
 
 			//Font Size
 			var fontSize = document.getElementById('fontSize').value;
@@ -113,7 +127,7 @@ var personaliseNow = document.getElementById('personaliseNow');
 var canvasForm = document.getElementById('personaliseForm');
 
 var clicked = false;
-$(personaliseNow).click(function () {
+$(personaliseNow).click(function() {
 	if (clicked == false) {
 		personaliseNow.innerHTML = 'Hide Personalise Menu';
 		canvasForm.style = 'display:block';
