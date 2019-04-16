@@ -34,6 +34,8 @@ html
     script(src='js/Mainmenu.js')
     script(src='js/errorMessages.js')
     script(src='js/jscolor.js')
+    script.
+      var presetLink = JSON.parse('!{JSON.stringify(presetLink)}');
   body
     a-scene(start='', embedded='', arjs='')
       a-assets

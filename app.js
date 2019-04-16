@@ -11,6 +11,8 @@ var sess;
 const https = require('https');
 const fs = require('fs');
 const port = 8080;
+var presetLink =
+	'https://api.mlab.com/api/1/databases/personalisar/collections/personalcanvas?apiKey=QcMYUxzSPh1UFvwhGMNJHciyVqHemZmC';
 app.use(
 	bodyParser.urlencoded({
 		extended: false
@@ -108,16 +110,18 @@ app.get('/personalisation', function(req, res, err) {
 								scale: '0.02 0.02 0.02',
 								rotation: '0 260 0',
 								modelName: 'Mug Colour:',
-								presets: nameOfDesignArray
+								presets: nameOfDesignArray,
+								presetLink: presetLink
 							});
 						}
 						if (modelId == 'cushion') {
 							res.render('personalisation-marker', {
 								model: '#cushion-obj',
-								scale: '0.1 0.1 0.1',
+								scale: '0.05 0.05 0.05',
 								rotation: '-90 0 0',
 								modelName: 'Cushion Colour:',
-								presets: nameOfDesignArray
+								presets: nameOfDesignArray,
+								presetLink: presetLink
 							});
 						}
 					}
@@ -128,7 +132,8 @@ app.get('/personalisation', function(req, res, err) {
 							scale: '0.07 0.07 0.07',
 							rotation: '0 260 0',
 							modelName: 'Mug Colour:',
-							presets: nameOfDesignArray
+							presets: nameOfDesignArray,
+							presetLink: presetLink
 						});
 					}
 					if (modelId == 'cushion') {
@@ -137,7 +142,8 @@ app.get('/personalisation', function(req, res, err) {
 							scale: '0.1 0.1 0.1',
 							rotation: '-90 0 0',
 							modelName: 'Cushion Colour:',
-							presets: nameOfDesignArray
+							presets: nameOfDesignArray,
+							presetLink: presetLink
 						});
 					}
 				} else {

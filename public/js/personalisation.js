@@ -84,18 +84,15 @@ AFRAME.registerComponent('start', {
 			}
 			var personalPreset = document.getElementById('canvasPresets');
 			var personalPresetValue = personalPreset.options[personalPreset.selectedIndex].value;
-			$.getJSON(
-				'https://api.mlab.com/api/1/databases/personalisar/collections/personalcanvas?apiKey=QcMYUxzSPh1UFvwhGMNJHciyVqHemZmC',
-				function(json) {
-					for (var i = 0; i < json.length; i++) {
-						var nameofDesign = json[i].nameOfDesign;
-						if (nameofDesign == personalPresetValue) {
-							img.src = json[i].image;
-							console.log(json[i].image);
-						}
+			$.getJSON(presetLink, function(json) {
+				for (var i = 0; i < json.length; i++) {
+					var nameofDesign = json[i].nameOfDesign;
+					if (nameofDesign == personalPresetValue) {
+						img.src = json[i].image;
+						console.log(json[i].image);
 					}
 				}
-			);
+			});
 
 			//Font Size
 			var fontSize = document.getElementById('fontSize').value;

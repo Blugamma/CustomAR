@@ -4,32 +4,29 @@ if (loginState == 'true') {
 		var personalPresetValue = personalPreset.options[personalPreset.selectedIndex].value;
 		console.log(personalPresetValue);
 
-		$.getJSON(
-			'https://api.mlab.com/api/1/databases/personalisar/collections/personalcanvas?apiKey=QcMYUxzSPh1UFvwhGMNJHciyVqHemZmC',
-			function(json) {
-				for (var i = 0; i < json.length; i++) {
-					var nameofDesign = json[i].nameOfDesign;
-					if (nameofDesign == personalPresetValue) {
-						console.log('test');
-						console.log(json[i]);
-						//Change model colour
-						document.getElementById('mugJscolor').value = json[i].modelColour;
-						document.getElementById('mugJscolor').style = 'background-color: #' + json[i].modelColour + ';';
-						//Change Personalised Text
-						document.getElementById('personaliseTxt').value = json[i].personalText;
-						//Change Text Colour
-						document.getElementById('textJscolor').value = json[i].textColour;
-						document.getElementById('textJscolor').style = 'background-color: #' + json[i].textColour + ';';
+		$.getJSON(presetLink, function(json) {
+			for (var i = 0; i < json.length; i++) {
+				var nameofDesign = json[i].nameOfDesign;
+				if (nameofDesign == personalPresetValue) {
+					console.log('test');
+					console.log(json[i]);
+					//Change model colour
+					document.getElementById('mugJscolor').value = json[i].modelColour;
+					document.getElementById('mugJscolor').style = 'background-color: #' + json[i].modelColour + ';';
+					//Change Personalised Text
+					document.getElementById('personaliseTxt').value = json[i].personalText;
+					//Change Text Colour
+					document.getElementById('textJscolor').value = json[i].textColour;
+					document.getElementById('textJscolor').style = 'background-color: #' + json[i].textColour + ';';
 
-						//Change FontSize
-						document.getElementById('fontSize').value = json[i].fontSize;
+					//Change FontSize
+					document.getElementById('fontSize').value = json[i].fontSize;
 
-						$('#personaliseForm').trigger('change');
-					}
-
-					//console.log("JSON Data: " + json[i].nameOfDesign);
+					$('#personaliseForm').trigger('change');
 				}
+
+				//console.log("JSON Data: " + json[i].nameOfDesign);
 			}
-		);
+		});
 	});
 }
