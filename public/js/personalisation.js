@@ -55,10 +55,10 @@ AFRAME.registerComponent('start', {
 			//Variables for Canvas
 			var colorPicker = document.getElementById('mugJscolor');
 			var textColorPicker = document.getElementById('textJscolor');
-			var textColorPickerValue = textColorPicker.style.backgroundColor;
+			//var textColorPickerValue = textColorPicker.style.backgroundColor;
 			var colorPickerValue = colorPicker.style.backgroundColor;
-			var personalisedTxt = document.getElementById('personaliseTxt').value;
-
+			//var personalisedTxt = document.getElementById('personaliseTxt').value;
+			console.log('test32' + colorPickerValue);
 			//Background Color
 			this.ctx.fillStyle = colorPickerValue;
 			this.ctx.fillRect(0, 0, 2448, 800);
@@ -95,18 +95,18 @@ AFRAME.registerComponent('start', {
 			});
 
 			//Font Size
-			var fontSize = document.getElementById('fontSize').value;
-			console.log(fontSize);
+			//var fontSize = document.getElementById('fontSize').value;
+			//console.log(fontSize);
 			//Font Canvas
-			this.ctx.fillStyle = textColorPickerValue;
-			if (url == 'cushion') {
-				this.ctx.font = fontSize + 'px' + ' Arial';
-				this.ctx.fillText(personalisedTxt, 1190, 525);
-			}
-			if (url == 'mug') {
-				this.ctx.font = fontSize * 4 + 'px' + ' Arial';
-				this.ctx.fillText(personalisedTxt, 500, 700);
-			}
+			//this.ctx.fillStyle = textColorPickerValue;
+			//if (url == 'cushion') {
+			//	this.ctx.font = fontSize + 'px' + ' Arial';
+			//	this.ctx.fillText(personalisedTxt, 1190, 525);
+			//}
+			//if (url == 'mug') {
+			//	this.ctx.font = fontSize * 4 + 'px' + ' Arial';
+			//	this.ctx.fillText(personalisedTxt, 500, 700);
+			//}
 		});
 	}
 });
@@ -134,4 +134,13 @@ $(personaliseNow).click(function() {
 		canvasForm.style = 'diplay:none';
 		clicked = false;
 	}
+});
+
+$('#modelColour').click(function() {
+	console.log('testjda');
+	$('#modelColourMenu').toggle('slide');
+});
+
+$('#imageUpload').click(function() {
+	$('#imageMenu').toggle('slide');
 });

@@ -109,7 +109,7 @@ app.get('/personalisation', function(req, res, err) {
 								model: '#mug-obj',
 								scale: '0.02 0.02 0.02',
 								rotation: '0 260 0',
-								modelName: 'Mug Colour:',
+								modelName: 'Mug Colour',
 								presets: nameOfDesignArray,
 								presetLink: presetLink
 							});
@@ -119,7 +119,7 @@ app.get('/personalisation', function(req, res, err) {
 								model: '#cushion-obj',
 								scale: '0.05 0.05 0.05',
 								rotation: '-90 0 0',
-								modelName: 'Cushion Colour:',
+								modelName: 'Cushion Colour',
 								presets: nameOfDesignArray,
 								presetLink: presetLink
 							});
@@ -131,7 +131,7 @@ app.get('/personalisation', function(req, res, err) {
 							model: '#mug-obj',
 							scale: '0.07 0.07 0.07',
 							rotation: '0 260 0',
-							modelName: 'Mug Colour:',
+							modelName: 'Mug Colour',
 							presets: nameOfDesignArray,
 							presetLink: presetLink
 						});
@@ -141,7 +141,7 @@ app.get('/personalisation', function(req, res, err) {
 							model: '#cushion-obj',
 							scale: '0.1 0.1 0.1',
 							rotation: '-90 0 0',
-							modelName: 'Cushion Colour:',
+							modelName: 'Cushion Colour',
 							presets: nameOfDesignArray,
 							presetLink: presetLink
 						});
@@ -158,7 +158,7 @@ app.get('/personalisation', function(req, res, err) {
 					model: '#mug-obj',
 					scale: '0.02 0.02 0.02',
 					rotation: '0 260 0',
-					modelName: 'Mug Colour:'
+					modelName: 'Mug Colour'
 				});
 			}
 			if (modelId == 'cushion') {
@@ -166,7 +166,7 @@ app.get('/personalisation', function(req, res, err) {
 					model: '#cushion-obj',
 					scale: '0.1 0.1 0.1',
 					rotation: '-90 0 0',
-					modelName: 'Cushion Colour:'
+					modelName: 'Cushion Colour'
 				});
 			}
 		} else if (deviceType == 'phone') {
@@ -175,7 +175,7 @@ app.get('/personalisation', function(req, res, err) {
 					model: '#mug-obj',
 					scale: '0.07 0.07 0.07',
 					rotation: '0 260 0',
-					modelName: 'Mug Colour:'
+					modelName: 'Mug Colour'
 				});
 			}
 			if (modelId == 'cushion') {
@@ -183,7 +183,7 @@ app.get('/personalisation', function(req, res, err) {
 					model: '#cushion-obj',
 					scale: '0.1 0.1 0.1',
 					rotation: '-90 0 0',
-					modelName: 'Cushion Colour:'
+					modelName: 'Cushion Colour'
 				});
 			}
 		}
