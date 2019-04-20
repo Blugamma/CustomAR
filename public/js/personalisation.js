@@ -55,9 +55,9 @@ AFRAME.registerComponent('start', {
 			//Variables for Canvas
 			var colorPicker = document.getElementById('mugJscolor');
 			var textColorPicker = document.getElementById('textJscolor');
-			//var textColorPickerValue = textColorPicker.style.backgroundColor;
+			var textColorPickerValue = textColorPicker.style.backgroundColor;
 			var colorPickerValue = colorPicker.style.backgroundColor;
-			//var personalisedTxt = document.getElementById('personaliseTxt').value;
+			var personalisedTxt = document.getElementById('personaliseTxt').value;
 			console.log('test32' + colorPickerValue);
 			//Background Color
 			this.ctx.fillStyle = colorPickerValue;
@@ -95,18 +95,18 @@ AFRAME.registerComponent('start', {
 			});
 
 			//Font Size
-			//var fontSize = document.getElementById('fontSize').value;
-			//console.log(fontSize);
+			var fontSize = document.getElementById('fontSize').value;
+			console.log(fontSize);
 			//Font Canvas
-			//this.ctx.fillStyle = textColorPickerValue;
-			//if (url == 'cushion') {
-			//	this.ctx.font = fontSize + 'px' + ' Arial';
-			//	this.ctx.fillText(personalisedTxt, 1190, 525);
-			//}
-			//if (url == 'mug') {
-			//	this.ctx.font = fontSize * 4 + 'px' + ' Arial';
-			//	this.ctx.fillText(personalisedTxt, 500, 700);
-			//}
+			this.ctx.fillStyle = textColorPickerValue;
+			if (url == 'cushion') {
+				this.ctx.font = fontSize + 'px' + ' Arial';
+				this.ctx.fillText(personalisedTxt, 1190, 525);
+			}
+			if (url == 'mug') {
+				this.ctx.font = fontSize * 4 + 'px' + ' Arial';
+				this.ctx.fillText(personalisedTxt, 500, 700);
+			}
 		});
 	}
 });
@@ -138,9 +138,47 @@ $(personaliseNow).click(function() {
 
 $('#modelColour').click(function() {
 	console.log('testjda');
-	$('#modelColourMenu').toggle('slide');
+	$('#modelColourMenu').slideToggle('slow');
+	$('#presetMenu').css('display', 'none');
+	$('#imageMenu').css('display', 'none');
+	$('#personalTextMenu').css('display', 'none');
+	$('#saveDesignMenu').css('display', 'none');
+});
+
+$('#loadDesign').click(function() {
+	$('#presetMenu').slideToggle('slow');
+	$('#modelColourMenu').css('display', 'none');
+	$('#imageMenu').css('display', 'none');
+	$('#personalTextMenu').css('display', 'none');
+	$('#saveDesignMenu').css('display', 'none');
 });
 
 $('#imageUpload').click(function() {
-	$('#imageMenu').toggle('slide');
+	$('#imageMenu').slideToggle('slow');
+	$('#modelColourMenu').css('display', 'none');
+	$('#presetMenu').css('display', 'none');
+	$('#personalTextMenu').css('display', 'none');
+	$('#saveDesignMenu').css('display', 'none');
+});
+
+$('#personalText').click(function() {
+	$('#personalTextMenu').slideToggle('slow');
+	$('#modelColourMenu').css('display', 'none');
+	$('#presetMenu').css('display', 'none');
+	$('#imageMenu').css('display', 'none');
+	$('#saveDesignMenu').css('display', 'none');
+});
+
+$('#saveDesign').click(function() {
+	$('#saveDesignMenu').slideToggle('slow');
+	$('#modelColourMenu').css('display', 'none');
+	$('#presetMenu').css('display', 'none');
+	$('#imageMenu').css('display', 'none');
+	$('#personalTextMenu').css('display', 'none');
+});
+
+$('#overlayToggle').click(function() {
+	$('#overlay2').animate({ width: 'toggle' }, 350);
+	$('#overlayToggle').css('left', '0px');
+	$('#overlay2').animate({ width: 'toggle' }, 350);
 });

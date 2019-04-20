@@ -25,7 +25,7 @@ html
     script(src='https://aframe.io/releases/0.6.0/aframe.min.js')
     script(src='https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js')
-    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+    script(src="https://code.jquery.com/jquery-3.4.0.min.js", integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=", crossorigin="anonymous")
     script(src='//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js')
     script.
       THREEx.ArToolkitContext.baseURL = 'https://rawgit.com/jeromeetienne/ar.js/master/three.js/';
@@ -49,7 +49,6 @@ html
         a-obj-model(scale=scale, src=model, rotation=rotation, material="src: #canvas")
           //- <a-animation attribute="rotation" dur="9000" to="0 360 0" repeat="indefinite" easing="linear"></a-animation>
       a-camera-static
-
     //- #overlay
     //-   #logo
     //-     img(src='images/logo.png')
@@ -76,6 +75,8 @@ html
     //-       option(value='30') 30
     //-     input#nameOfDesign(placeholder="Name of Design", name="nameOfDesign", required)
     //-     button.btn#saveDesign(style='display: none;', type="submit") Save Design
+    #overlayToggle
+      i(class="fas fa-chevron-right")
     #overlay2
       #iconBar
         .icon#modelColour
@@ -93,13 +94,33 @@ html
         .icon#loadDesign
           i(class="fas fa-sync-alt")
           p Load Design 
-      form#personaliseForm(action='/personaliseForm', method='POST', enctype="multipart/form-data") 
+    form#personaliseForm(action='/personaliseForm', method='POST', enctype="multipart/form-data")
+        #presetMenu
+          #canvasPreset(style='display: none;')
+            p Personal Presets:
+              select#canvasPresets(style="display:block", name="canvasPresets")
+                if presets != underfiend
+                  each preset in presets
+                    option=preset
         #modelColourMenu
+          p Choose a colour:
           //-button#mugJscolor.jscolor(class="{valueElement:mugJscolor, width:243, height:150, position:'top', left:'10px', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#38aa82'}")
           input#mugJscolor.jscolor(class="{valueElement:mugJscolor, width:243, height:150, position:'top', left:'10px', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#38aa82'}", name="modelColour")
         #imageMenu
           input#image(type='file', name='image', required)
-
+        #personalTextMenu
+          input#personaliseTxt(placeholder="Personalised Text", type='text', name="personalText", required)
+          p Text Colour:
+          input#textJscolor.jscolor(class="{valueElement:textJscolor, width:243, height:150, position:'bottom', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c'}", name="textColour")
+          p Font Size:
+          select#fontSize(name="fontSize")
+            option.fontSize(value='14') 14
+            option(value='16') 16
+            option(value='18') 18
+            option(value='30') 30
+        #saveDesignMenu
+          input#nameOfDesign(placeholder="Name of Design", name="nameOfDesign", required)
+          button.btn#saveDesign(type="submit") Save Design
 script(src='js/accountForm.js')
 script(src='js/errorMessages.js')
 script(src='js/personalisation.js')
