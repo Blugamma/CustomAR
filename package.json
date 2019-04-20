@@ -1,37 +1,35 @@
 {
-  "name": "personalisar",
-  "version": "1.0.0",
-  "description": "A way of personalising a product in Augmented Reality",
-  "main": "app.js",
-  "dependencies": {
-    "bcrypt": "^3.0.4",
-    "canvas": "^2.3.1",
-    "cookie-parser": "^1.4.4",
-    "express": "^4.16.4",
-    "express-device": "^0.4.2",
-    "express-session": "^1.15.6",
-    "fs": "^0.0.1-security",
-    "http": "0.0.0",
-    "mongoose": "^5.4.19",
-    "mongoose-sequence": "^5.0.1",
-    "multer": "^1.4.1",
-    "pug": "^2.0.3",
-    "security": "^1.0.0",
-    "socket.io": "^2.2.0",
-    "ws": "^6.2.0"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "node app"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Blugamma/personalisAR.git"
-  },
-  "author": "Oliver Smith",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Blugamma/personalisAR/issues"
-  },
-  "homepage": "https://github.com/Blugamma/personalisAR#readme"
+	"name": "personalisar",
+	"version": "1.0.0",
+	"description": "A way of personalising a product in Augmented Reality",
+	"main": "app.js",
+	"dependencies": {
+		"bcrypt": "^3.0.4",
+		"canvas": "^2.3.1",
+		"cookie-parser": "^1.4.4",
+		"express": "^4.16.4",
+		"express-device": "^0.4.2",
+		"express-session": "^1.15.6",
+		"fs": "^0.0.1-security",
+		"http": "0.0.0",
+		"mongoose": "^5.4.19",
+		"mongoose-sequence": "^5.0.1",
+		"multer": "^1.4.1",
+		"pug": "^2.0.3",
+		"security": "^1.0.0"
+	},
+	"devDependencies": {},
+	"scripts": {
+		"test": "node app"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Blugamma/personalisAR.git"
+	},
+	"author": "Oliver Smith",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Blugamma/personalisAR/issues"
+	},
+	"homepage": "https://github.com/Blugamma/personalisAR#readme"
 }

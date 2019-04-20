@@ -82,17 +82,20 @@ AFRAME.registerComponent('start', {
 			} else {
 				console.log('image not selected');
 			}
-			var personalPreset = document.getElementById('canvasPresets');
-			var personalPresetValue = personalPreset.options[personalPreset.selectedIndex].value;
-			$.getJSON(presetLink, function(json) {
-				for (var i = 0; i < json.length; i++) {
-					var nameofDesign = json[i].nameOfDesign;
-					if (nameofDesign == personalPresetValue) {
-						img.src = json[i].image;
-						console.log(json[i].image);
+
+			if (loginState == 'true') {
+				var personalPreset = document.getElementById('canvasPresets');
+				var personalPresetValue = personalPreset.options[personalPreset.selectedIndex].value;
+				$.getJSON(presetLink, function(json) {
+					for (var i = 0; i < json.length; i++) {
+						var nameofDesign = json[i].nameOfDesign;
+						if (nameofDesign == personalPresetValue) {
+							img.src = json[i].image;
+							console.log(json[i].image);
+						}
 					}
-				}
-			});
+				});
+			}
 
 			//Font Size
 			var fontSize = document.getElementById('fontSize').value;
@@ -109,76 +112,4 @@ AFRAME.registerComponent('start', {
 			}
 		});
 	}
-});
-
-var loginState = getCookie('loginState');
-if (loginState == 'true') {
-	var canvasPreset = document.getElementById('canvasPreset');
-	canvasPreset.style = 'display:block';
-	var saveDesign = document.getElementById('saveDesign');
-	saveDesign.style = 'display:block';
-	var NameOfDesign = document.getElementById('nameOfDesign');
-	NameOfDesign.style = 'display:block';
-}
-var personaliseNow = document.getElementById('personaliseNow');
-var canvasForm = document.getElementById('personaliseForm');
-
-var clicked = false;
-$(personaliseNow).click(function() {
-	if (clicked == false) {
-		personaliseNow.innerHTML = 'Hide Personalise Menu';
-		canvasForm.style = 'display:block';
-		clicked = true;
-	} else {
-		personaliseNow.innerHTML = 'Show Personalise Menu';
-		canvasForm.style = 'diplay:none';
-		clicked = false;
-	}
-});
-
-$('#modelColour').click(function() {
-	console.log('testjda');
-	$('#modelColourMenu').slideToggle('slow');
-	$('#presetMenu').css('display', 'none');
-	$('#imageMenu').css('display', 'none');
-	$('#personalTextMenu').css('display', 'none');
-	$('#saveDesignMenu').css('display', 'none');
-});
-
-$('#loadDesign').click(function() {
-	$('#presetMenu').slideToggle('slow');
-	$('#modelColourMenu').css('display', 'none');
-	$('#imageMenu').css('display', 'none');
-	$('#personalTextMenu').css('display', 'none');
-	$('#saveDesignMenu').css('display', 'none');
-});
-
-$('#imageUpload').click(function() {
-	$('#imageMenu').slideToggle('slow');
-	$('#modelColourMenu').css('display', 'none');
-	$('#presetMenu').css('display', 'none');
-	$('#personalTextMenu').css('display', 'none');
-	$('#saveDesignMenu').css('display', 'none');
-});
-
-$('#personalText').click(function() {
-	$('#personalTextMenu').slideToggle('slow');
-	$('#modelColourMenu').css('display', 'none');
-	$('#presetMenu').css('display', 'none');
-	$('#imageMenu').css('display', 'none');
-	$('#saveDesignMenu').css('display', 'none');
-});
-
-$('#saveDesign').click(function() {
-	$('#saveDesignMenu').slideToggle('slow');
-	$('#modelColourMenu').css('display', 'none');
-	$('#presetMenu').css('display', 'none');
-	$('#imageMenu').css('display', 'none');
-	$('#personalTextMenu').css('display', 'none');
-});
-
-$('#overlayToggle').click(function() {
-	$('#overlay2').animate({ width: 'toggle' }, 350);
-	$('#overlayToggle').css('left', '0px');
-	$('#overlay2').animate({ width: 'toggle' }, 350);
 });

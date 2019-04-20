@@ -29,8 +29,11 @@ html
     script(src='js/Mainmenu.js')
     script(src='js/errorMessages.js')
     script(src='js/jscolor.js')
+    if presets != underfiend
+      script.
+        var presetLink = JSON.parse('!{JSON.stringify(presetLink)}');
   body
-    a-scene(xrweb='', xrextras-tap-recenter='', xrextras-almost-there='', xrextras-loading='', xrextras-runtime-error='', start='')
+    a-scene(id="aFrameScene", xrweb='', xrextras-tap-recenter='', xrextras-almost-there='', xrextras-loading='', xrextras-runtime-error='', start='')
       a-camera(position='0 8 8')
       a-assets
         a-asset-item#mug-mtl(src='3Dmodels/mug/coffeMug1_free_obj.mtl')
@@ -39,28 +42,54 @@ html
         a-asset-item#cushion-mtl(src='3Dmodels/cushion/pillow.mtl')
         canvas#canvas
       a-obj-model(scale=scale, src=model, rotation=rotation, material='src: #canvas')
-        //a-animation(attribute='rotation', dur='9000', to='0 360 0', repeat='indefinite', easing='linear')
-    #overlay
-      p.btn#personaliseNow Show Personalise Menu
-      form#personaliseForm(action='/personaliseForm', method='POST')
-        #canvasPreset(style='display: none;')
-          input#personaliseTxt2(type='text')
+  #overlayToggle
+    i(class="fas fa-chevron-left")
+  #overlay2
+    #iconBar
+      .icon#modelColour
+        i(class="fas fa-fill-drip")
         p= modelName
-        input#mugJscolor.jscolor(class="{valueElement:mugJscolor, width:243, height:150, position:'bottom', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c'}", name="modelColour")
-        p Image upload
-        input#image(type='file', name='image')
-        p Personalised Text
-        input#personaliseTxt(type='text', name="personalText")
-        p Text Colour:
-        input#textJscolor.jscolor(class="{valueElement:textJscolor, width:243, height:150, position:'bottom', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c'}", name="textColour")
-        p Font Size:
-        select#fontSize(name="fontSize")
-          option.fontSize(value='14') 14
-          option(value='16') 16
-          option(value='18') 18
-          option(value='30') 30
-        input#nameOfDesign(placeholder="Name of Design", name="nameOfDesign")
-        button.btn#saveDesign(style='display: none;', type="submit") Save Design
+      .icon#imageUpload
+        i(class="fas fa-images")
+        p Image Upload
+      .icon#personalText
+        i(class="fas fa-font")
+        p Personal Text
+      .icon#saveDesign
+        i(class="fas fa-save")
+        p Save Design
+      .icon#loadDesign
+        i(class="fas fa-sync-alt")
+        p Load Design 
+  form#personaliseForm(action='/personaliseForm', method='POST', enctype="multipart/form-data")
+    input#image(type='file', name='image', required)
+    #presetMenu
+      #canvasPreset(style='display: none;')
+        p Personal Presets:
+          select#canvasPresets(style="display:block", name="canvasPresets")
+            if presets != underfiend
+              each preset in presets
+                option=preset
+    #modelColourMenu
+      p Choose a colour:
+      input#mugJscolor.jscolor(class="{valueElement:mugJscolor, width:243, height:150, position:'top', left:'10px', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#38aa82'}", name="modelColour")
+    #personalTextMenu
+      p Personalised Text:
+      input#personaliseTxt(type='text', name="personalText", required)
+      p Text Colour:
+      input#textJscolor.jscolor(class="{valueElement:textJscolor, width:243, height:150, position:'top', left:'10px', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#38aa82'}", name="textColour")
+      p Font Size:
+      select#fontSize(name="fontSize", placeholder="Font Size")
+        option(value='14') 14
+        option(value='16') 16
+        option(value='18') 18
+        option(value='30') 30
+    #saveDesignMenu
+      p Name the Design
+      input#nameOfDesign(name="nameOfDesign", required)
+      button.btn#saveDesign(type="submit") Save Design
 script(src='js/accountForm.js')
 script(src='js/errorMessages.js')
 script(src='js/personalisation.js')
+script(src='js/overlay.js')
+script(src='js/personalPresets.js')

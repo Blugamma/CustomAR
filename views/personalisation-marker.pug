@@ -38,7 +38,7 @@ html
       script.
         var presetLink = JSON.parse('!{JSON.stringify(presetLink)}');
   body
-    a-scene(start='', embedded='', arjs='')
+    a-scene(id="aFrameScene" start='', embedded='', arjs='')
       a-assets
         a-asset-item#mug-mtl(src='3Dmodels/mug/coffeMug1_free_obj.mtl')
         a-asset-item#mug-obj(src='3Dmodels/mug/coffeMug1_free_obj.obj')
@@ -76,7 +76,7 @@ html
     //-     input#nameOfDesign(placeholder="Name of Design", name="nameOfDesign", required)
     //-     button.btn#saveDesign(style='display: none;', type="submit") Save Design
     #overlayToggle
-      i(class="fas fa-chevron-right")
+      i(class="fas fa-chevron-left")
     #overlay2
       #iconBar
         .icon#modelColour
@@ -95,33 +95,34 @@ html
           i(class="fas fa-sync-alt")
           p Load Design 
     form#personaliseForm(action='/personaliseForm', method='POST', enctype="multipart/form-data")
-        #presetMenu
-          #canvasPreset(style='display: none;')
-            p Personal Presets:
-              select#canvasPresets(style="display:block", name="canvasPresets")
-                if presets != underfiend
-                  each preset in presets
-                    option=preset
-        #modelColourMenu
-          p Choose a colour:
-          //-button#mugJscolor.jscolor(class="{valueElement:mugJscolor, width:243, height:150, position:'top', left:'10px', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#38aa82'}")
-          input#mugJscolor.jscolor(class="{valueElement:mugJscolor, width:243, height:150, position:'top', left:'10px', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#38aa82'}", name="modelColour")
-        #imageMenu
-          input#image(type='file', name='image', required)
-        #personalTextMenu
-          input#personaliseTxt(placeholder="Personalised Text", type='text', name="personalText", required)
-          p Text Colour:
-          input#textJscolor.jscolor(class="{valueElement:textJscolor, width:243, height:150, position:'bottom', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#19171c'}", name="textColour")
-          p Font Size:
-          select#fontSize(name="fontSize")
-            option.fontSize(value='14') 14
-            option(value='16') 16
-            option(value='18') 18
-            option(value='30') 30
-        #saveDesignMenu
-          input#nameOfDesign(placeholder="Name of Design", name="nameOfDesign", required)
-          button.btn#saveDesign(type="submit") Save Design
+      input#image(type='file', name='image', required)
+      #presetMenu
+        #canvasPreset(style='display: none;')
+          p Personal Presets:
+            select#canvasPresets(style="display:block", name="canvasPresets")
+              if presets != underfiend
+                each preset in presets
+                  option=preset
+      #modelColourMenu
+        p Choose a colour:
+        input#mugJscolor.jscolor(class="{valueElement:mugJscolor, width:243, height:150, position:'top', left:'10px', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#38aa82'}", name="modelColour")
+      #personalTextMenu
+        p Personalised Text:
+        input#personaliseTxt(type='text', name="personalText", required)
+        p Text Colour:
+        input#textJscolor.jscolor(class="{valueElement:textJscolor, width:243, height:150, position:'top', left:'10px', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#38aa82'}", name="textColour")
+        p Font Size:
+        select#fontSize(name="fontSize", placeholder="Font Size")
+          option(value='14') 14
+          option(value='16') 16
+          option(value='18') 18
+          option(value='30') 30
+      #saveDesignMenu
+        p Name the Design
+        input#nameOfDesign(name="nameOfDesign", required)
+        button.btn#saveDesign(type="submit") Save Design
 script(src='js/accountForm.js')
 script(src='js/errorMessages.js')
 script(src='js/personalisation.js')
+script(src='js/overlay.js')
 script(src='js/personalPresets.js')

@@ -125,7 +125,8 @@ app.get('/personalisation', function(req, res, err) {
 							});
 						}
 					}
-				} else if (deviceType == 'phone') {
+				}
+				if (deviceType == 'phone') {
 					if (modelId == 'mug') {
 						res.render('personalisation-markerless', {
 							model: '#mug-obj',
