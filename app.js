@@ -147,8 +147,6 @@ app.get('/personalisation', function(req, res, err) {
 							presetLink: presetLink
 						});
 					}
-				} else {
-					console.log('No Data found!');
 				}
 			}
 		);

@@ -382,6 +382,10 @@ a:visited {
 	display: block;
 }
 
+select#canvasPresets {
+	margin-top: 10px;
+}
+
 #modelColourMenu p,
 #personalTextMenu p,
 #presetMenu p,
@@ -389,6 +393,18 @@ a:visited {
 	font-family: 'Open Sans', sans-serif;
 	color: white;
 	text-align: center;
+}
+
+button#saveDesign {
+	background-color: #38aa82;
+	color: white;
+	display: block;
+	margin: auto;
+	margin-top: 20px;
+	border: 1px solid white;
+	border-radius: 5px;
+	padding: 10px;
+	font-size: 15px;
 }
 
 #image {
@@ -405,8 +421,9 @@ a:visited {
 }
 
 .icon:hover,
-#overlayToggle:hover {
-	text-shadow: 2px 2px black !important;
+#overlayToggle:hover,
+button#saveDesign:hover {
+	text-shadow: 1px 1px black !important;
 	cursor: pointer;
 }
 

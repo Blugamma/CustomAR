@@ -74,7 +74,17 @@ AFRAME.registerComponent('start', {
 					this.ctx.drawImage(this, 1100, 400, 480 / 2, 480 / 5);
 				}
 				if (url == 'mug') {
-					this.ctx.drawImage(this, 300, 110, 480, 480);
+					this.ctx.drawImage(
+						/*image src */ this,
+						/*image srcX */ 0,
+						/*image srcY */ 150,
+						/*image srcWidth */ 480,
+						/*image srcHeight */ 480,
+						/*image canvasX */ 300,
+						/*image canvasY */ 110,
+						/*image canvasWidth */ 480,
+						/*image canvasHeight */ 480
+					);
 				}
 			};
 			if (canvasImage.files[0] != undefined) {
