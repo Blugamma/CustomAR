@@ -38,6 +38,7 @@ $('#modelColour').click(function() {
 	$('#imageMenu').css('display', 'none');
 	$('#personalTextMenu').css('display', 'none');
 	$('#saveDesignMenu').css('display', 'none');
+	$('#imageMenu').css('display', 'none');
 });
 
 //Load Design overlay show/hide
@@ -47,6 +48,7 @@ $('#loadDesign').click(function() {
 	$('#imageMenu').css('display', 'none');
 	$('#personalTextMenu').css('display', 'none');
 	$('#saveDesignMenu').css('display', 'none');
+	$('#imageMenu').css('display', 'none');
 });
 
 $('#imageUpload').click(function() {
@@ -64,6 +66,7 @@ $('#personalText').click(function() {
 	$('#presetMenu').css('display', 'none');
 	$('#imageMenu').css('display', 'none');
 	$('#saveDesignMenu').css('display', 'none');
+	$('#imageMenu').css('display', 'none');
 });
 
 //Save Design overlay show/hide
@@ -73,6 +76,7 @@ $('#saveDesign').click(function() {
 	$('#presetMenu').css('display', 'none');
 	$('#imageMenu').css('display', 'none');
 	$('#personalTextMenu').css('display', 'none');
+	$('#imageMenu').css('display', 'none');
 });
 
 //Toggle for opening the main overlay
@@ -91,6 +95,7 @@ $('#overlayToggle').click(function() {
 		$('#imageMenu').css('display', 'none');
 		$('#personalTextMenu').css('display', 'none');
 		$('#saveDesignMenu').css('display', 'none');
+		$('#imageMenu').css('display', 'none');
 	}
 });
 
@@ -105,6 +110,7 @@ $('#aFrameScene').click(function() {
 	$('#imageMenu').css('display', 'none');
 	$('#personalTextMenu').css('display', 'none');
 	$('#saveDesignMenu').css('display', 'none');
+	$('#imageMenu').css('display', 'none');
 });
 
 var readURL = function(input) {

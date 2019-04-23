@@ -356,7 +356,8 @@ a:visited {
 #modelColourMenu,
 #presetMenu,
 #personalTextMenu,
-#saveDesignMenu {
+#saveDesignMenu,
+#imageMenu {
 	display: none;
 	position: absolute;
 	top: 0px;
@@ -407,9 +408,9 @@ button#saveDesign {
 	font-size: 15px;
 }
 
-#image {
+/* #image {
 	display: none;
-}
+} */
 
 .icon {
 	width: 100%;

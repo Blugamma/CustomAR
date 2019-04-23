@@ -1,3 +1,24 @@
+//Model Colour Canvas
+var modelColourCanvas = document.createElement('canvas');
+modelColourCanvas.id = 'modelColourCanvas';
+modelColourCanvas.width = 2448;
+modelColourCanvas.height = 800;
+var modelColourCtx = modelColourCanvas.getContext('2d');
+
+//Image Canvas
+var imageCanvas = document.createElement('canvas');
+imageCanvas.id = 'imageCanvas';
+imageCanvas.width = 480;
+imageCanvas.height = 480;
+var imageCtx = imageCanvas.getContext('2d');
+
+//Font Canvas
+var fontCanvas = document.createElement('canvas');
+fontCanvas.id = 'fontCanvas';
+fontCanvas.width = 480;
+fontCanvas.height = 50;
+var fontCtx = fontCanvas.getContext('2d');
+
 function getUrlVars() {
 	var vars = {};
 	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
@@ -11,7 +32,6 @@ var url = getUrlVars()['model'];
 AFRAME.registerComponent('start', {
 	init: function() {
 		this.canvas = document.getElementById('canvas');
-
 		this.canvas.width = 2448;
 		this.canvas.height = 800;
 		this.ctx = this.canvas.getContext('2d');
@@ -46,49 +66,58 @@ AFRAME.registerComponent('start', {
 
 		this.ctx.fillStyle = 'black';
 		this.ctx.fillText('Text Here', 40, 100);
-
-		//personalised overlay form checking for changes
-		$('#personaliseForm').change(function() {
+		$('#mugJscolor').change(function() {
 			this.canvas = document.getElementById('canvas');
 			this.ctx = canvas.getContext('2d');
-
-			//Variables for Canvas
 			var colorPicker = document.getElementById('mugJscolor');
-			var textColorPicker = document.getElementById('textJscolor');
-			var textColorPickerValue = textColorPicker.style.backgroundColor;
 			var colorPickerValue = colorPicker.style.backgroundColor;
-			var personalisedTxt = document.getElementById('personaliseTxt').value;
-			console.log('test32' + colorPickerValue);
-			//Background Color
-			this.ctx.fillStyle = colorPickerValue;
-			this.ctx.fillRect(0, 0, 2448, 800);
+			modelColourCtx.fillStyle = colorPickerValue;
+			modelColourCtx.fillRect(0, 0, 2448, 800);
+			$('#personalTextMenu').change();
+			this.ctx.drawImage(modelColourCanvas, 0, 0, 2448, 800);
+			this.ctx.drawImage(fontCanvas, 300, 610, 480, 50);
+			this.ctx.drawImage(imageCanvas, 300, 110, 480, 480);
+		});
 
+		$('#image').change(function() {
+			this.canvas = document.getElementById('canvas');
+			this.ctx = canvas.getContext('2d');
 			//Image Canvas
 			console.log(url);
 			var img = new Image();
 			var canvasImage = document.getElementById('image');
 			img.onload = function() {
 				this.canvas = document.getElementById('canvas');
-				this.ctx = canvas.getContext('2d');
+				this.ctx = this.canvas.getContext('2d');
+
 				if (url == 'cushion') {
-					this.ctx.drawImage(this, 1100, 400, 480 / 2, 480 / 5);
+					imageCtx.drawImage(this, 1100, 400, 480 / 2, 480 / 5);
 				}
 				if (url == 'mug') {
-					this.ctx.drawImage(
+					imageCtx.drawImage(
 						/*image src */ this,
-						/*image srcX */ 0,
-						/*image srcY */ 150,
-						/*image srcWidth */ 480,
-						/*image srcHeight */ 480,
-						/*image canvasX */ 300,
-						/*image canvasY */ 110,
+						/*image canvasX */ 0,
+						/*image canvasY */ 0,
 						/*image canvasWidth */ 480,
 						/*image canvasHeight */ 480
 					);
+					this.ctx.drawImage(imageCanvas, 300, 110, 480, 480);
 				}
 			};
 			if (canvasImage.files[0] != undefined) {
-				img.src = URL.createObjectURL(canvasImage.files[0]);
+				$('#imageCropper').attr('src', URL.createObjectURL(canvasImage.files[0]));
+				var resize = new Croppie($('#imageCropper')[0], {
+					viewport: { width: 480, height: 480 },
+					boundary: { width: 600, height: 600 },
+					showZoomer: false,
+					enableResize: false,
+					enableOrientation: true
+				});
+				$('#imageCropBtn').click(function() {
+					resize.result('base64').then(function(dataImg) {
+						img.src = dataImg;
+					});
+				});
 			} else {
 				console.log('image not selected');
 			}
@@ -107,19 +136,39 @@ AFRAME.registerComponent('start', {
 				});
 			}
 
-			//Font Size
+			this.ctx.drawImage(modelColourCanvas, 0, 0, 2448, 800);
+			this.ctx.drawImage(fontCanvas, 300, 610, 480, 50);
+			this.ctx.drawImage(imageCanvas, 300, 110, 480, 480);
+		});
+		$('#personalTextMenu').change(function() {
+			this.canvas = document.getElementById('canvas');
+			this.ctx = canvas.getContext('2d');
+
 			var fontSize = document.getElementById('fontSize').value;
-			console.log(fontSize);
+			var colorPicker = document.getElementById('mugJscolor');
+			var colorPickerValue = colorPicker.style.backgroundColor;
+			var textColorPicker = document.getElementById('textJscolor');
+			var textColorPickerValue = textColorPicker.style.backgroundColor;
+			var personalisedTxt = document.getElementById('personaliseTxt').value;
+			fontCtx.fillStyle = colorPickerValue;
+			fontCtx.fillRect(0, 0, 480, 50);
 			//Font Canvas
-			this.ctx.fillStyle = textColorPickerValue;
+			fontCtx.fillStyle = textColorPickerValue;
 			if (url == 'cushion') {
-				this.ctx.font = fontSize + 'px' + ' Arial';
-				this.ctx.fillText(personalisedTxt, 1190, 525);
+				fontCtx.font = fontSize + 'px' + ' Arial';
+				fontCtx.textAlign = 'center';
+				fontCtx.fillText(personalisedTxt, 1190, 525);
 			}
 			if (url == 'mug') {
-				this.ctx.font = fontSize * 4 + 'px' + ' Arial';
-				this.ctx.fillText(personalisedTxt, 500, 700);
+				fontCtx.font = fontSize * 2 + 'px' + ' Arial';
+				fontCtx.textAlign = 'center';
+				//fontCtx.fillText(personalisedTxt, 500, 700);
+				fontCtx.fillText(personalisedTxt, 240, 50);
 			}
+
+			this.ctx.drawImage(modelColourCanvas, 0, 0, 2448, 800);
+			this.ctx.drawImage(fontCanvas, 300, 610, 480, 50);
+			this.ctx.drawImage(imageCanvas, 300, 110, 480, 480);
 		});
 	}
 });

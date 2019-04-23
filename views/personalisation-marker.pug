@@ -34,6 +34,8 @@ html
     script(src='js/Mainmenu.js')
     script(src='js/errorMessages.js')
     script(src='js/jscolor.js')
+    script(src='js/croppie.js')
+    link(rel='stylesheet', type='text/css', href='css/croppie.css')
     if presets != underfiend
       script.
         var presetLink = JSON.parse('!{JSON.stringify(presetLink)}');
@@ -117,6 +119,10 @@ html
           option(value='16') 16
           option(value='18') 18
           option(value='30') 30
+      #imageMenu
+        img#imageCropper
+        button#imageCropBtn Crop Image
+        button#imageCropBtn2 test Image
       #saveDesignMenu
         p Name the Design
         input#nameOfDesign(name="nameOfDesign", required)
