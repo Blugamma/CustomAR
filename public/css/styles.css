@@ -396,7 +396,8 @@ select#canvasPresets {
 	text-align: center;
 }
 
-button#saveDesign {
+button#saveDesign,
+#imageCropBtn {
 	background-color: #38aa82;
 	color: white;
 	display: block;
@@ -408,9 +409,9 @@ button#saveDesign {
 	font-size: 15px;
 }
 
-/* #image {
+#image {
 	display: none;
-} */
+}
 
 .icon {
 	width: 100%;
@@ -473,6 +474,11 @@ button#saveDesign:hover {
 	#personalTextMenu,
 	#saveDesignMenu {
 		width: 60%;
+	}
+
+	#imageMenu {
+		width: 90%;
+		left: 2%;
 	}
 
 	#overlay2 {

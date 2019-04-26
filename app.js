@@ -10,6 +10,7 @@ var session = require('express-session');
 var sess;
 const https = require('https');
 const fs = require('fs');
+const uuidv4 = require('uuid/v4');
 const port = 8080;
 var presetLink =
 	'https://api.mlab.com/api/1/databases/personalisar/collections/personalcanvas?apiKey=QcMYUxzSPh1UFvwhGMNJHciyVqHemZmC';
@@ -168,7 +169,8 @@ app.get('/personalisation', function(req, res, err) {
 					modelName: 'Cushion Colour'
 				});
 			}
-		} else if (deviceType == 'phone') {
+		}
+		if (deviceType == 'phone') {
 			if (modelId == 'mug') {
 				res.render('personalisation-markerless', {
 					model: '#mug-obj',
@@ -193,12 +195,19 @@ app.post('/personaliseForm', upload.single('image'), function(req, res, err) {
 	if (err) console.log(err);
 	sess = req.session;
 	console.log(req.body);
+	var filename = uuidv4();
+	var img = req.body.imageBase64;
+	var imageDecoded = img.split(';base64,').pop();
+	var newImageName = 'base64-' + filename + '.jpg';
+	fs.writeFile('public/uploads/' + newImageName, imageDecoded, { encoding: 'base64' }, function() {
+		console.log('file created');
+	});
 	var userID = sess.userid;
 	var newpersonalCanvasData = new personalCanvas({
 		userId: userID,
 		nameOfDesign: req.body.nameOfDesign,
 		modelColour: req.body.modelColour,
-		image: 'uploads/' + req.file.filename,
+		image: 'uploads/' + newImageName,
 		personalText: req.body.personalText,
 		textColour: req.body.textColour,
 		fontSize: req.body.fontSize

@@ -16,7 +16,7 @@ var imageCtx = imageCanvas.getContext('2d');
 var fontCanvas = document.createElement('canvas');
 fontCanvas.id = 'fontCanvas';
 fontCanvas.width = 480;
-fontCanvas.height = 50;
+fontCanvas.height = 60;
 var fontCtx = fontCanvas.getContext('2d');
 
 function getUrlVars() {
@@ -74,12 +74,19 @@ AFRAME.registerComponent('start', {
 			modelColourCtx.fillStyle = colorPickerValue;
 			modelColourCtx.fillRect(0, 0, 2448, 800);
 			$('#personalTextMenu').change();
-			this.ctx.drawImage(modelColourCanvas, 0, 0, 2448, 800);
-			this.ctx.drawImage(fontCanvas, 300, 610, 480, 50);
-			this.ctx.drawImage(imageCanvas, 300, 110, 480, 480);
+			if (url == 'cushion') {
+				this.ctx.drawImage(modelColourCanvas, 0, 0, 2448, 800);
+				this.ctx.drawImage(fontCanvas, 1100, 480, 480, 60);
+				this.ctx.drawImage(imageCanvas, 1100, 400, 240, 220);
+			}
+			if (url == 'mug') {
+				this.ctx.drawImage(modelColourCanvas, 0, 0, 2448, 800);
+				this.ctx.drawImage(fontCanvas, 300, 610, 480, 60);
+				this.ctx.drawImage(imageCanvas, 300, 110, 480, 480);
+			}
 		});
 
-		$('#image').change(function() {
+		$('#imageMenu').change(function() {
 			this.canvas = document.getElementById('canvas');
 			this.ctx = canvas.getContext('2d');
 			//Image Canvas
@@ -91,7 +98,10 @@ AFRAME.registerComponent('start', {
 				this.ctx = this.canvas.getContext('2d');
 
 				if (url == 'cushion') {
-					imageCtx.drawImage(this, 1100, 400, 480 / 2, 480 / 5);
+					imageCtx.drawImage(this, 0, 0, 480, 220);
+					this.ctx.drawImage(modelColourCanvas, 0, 0, 2448, 800);
+					this.ctx.drawImage(fontCanvas, 1100, 480, 480, 60);
+					this.ctx.drawImage(imageCanvas, 1100, 400, 240, 220);
 				}
 				if (url == 'mug') {
 					imageCtx.drawImage(
@@ -101,22 +111,30 @@ AFRAME.registerComponent('start', {
 						/*image canvasWidth */ 480,
 						/*image canvasHeight */ 480
 					);
+					this.ctx.drawImage(modelColourCanvas, 0, 0, 2448, 800);
+					this.ctx.drawImage(fontCanvas, 300, 610, 480, 60);
 					this.ctx.drawImage(imageCanvas, 300, 110, 480, 480);
 				}
 			};
 			if (canvasImage.files[0] != undefined) {
-				$('#imageCropper').attr('src', URL.createObjectURL(canvasImage.files[0]));
-				var resize = new Croppie($('#imageCropper')[0], {
-					viewport: { width: 480, height: 480 },
-					boundary: { width: 600, height: 600 },
-					showZoomer: false,
-					enableResize: false,
-					enableOrientation: true
-				});
+				//$('#imageCropper').attr('src', URL.createObjectURL(canvasImage.files[0]));
+
 				$('#imageCropBtn').click(function() {
-					resize.result('base64').then(function(dataImg) {
-						img.src = dataImg;
-					});
+					$('#imageUpload').css('pointer-events', 'auto');
+					$('#imageUpload').attr('data-click-state', 0);
+					$('#imageCropper')
+						.croppie('result', {
+							type: 'base64',
+							format: 'jpeg'
+						})
+						.then(function(resp) {
+							img.src = resp;
+							var imageBase64 = document.getElementById('imageBase64');
+							imageBase64.value = resp;
+							$('#imageCropper').croppie('destroy');
+						});
+
+					$('#imageMenu').css('display', 'none');
 				});
 			} else {
 				console.log('image not selected');
@@ -135,10 +153,6 @@ AFRAME.registerComponent('start', {
 					}
 				});
 			}
-
-			this.ctx.drawImage(modelColourCanvas, 0, 0, 2448, 800);
-			this.ctx.drawImage(fontCanvas, 300, 610, 480, 50);
-			this.ctx.drawImage(imageCanvas, 300, 110, 480, 480);
 		});
 		$('#personalTextMenu').change(function() {
 			this.canvas = document.getElementById('canvas');
@@ -151,24 +165,26 @@ AFRAME.registerComponent('start', {
 			var textColorPickerValue = textColorPicker.style.backgroundColor;
 			var personalisedTxt = document.getElementById('personaliseTxt').value;
 			fontCtx.fillStyle = colorPickerValue;
-			fontCtx.fillRect(0, 0, 480, 50);
+			fontCtx.fillRect(0, 0, 480, 60);
 			//Font Canvas
 			fontCtx.fillStyle = textColorPickerValue;
 			if (url == 'cushion') {
 				fontCtx.font = fontSize + 'px' + ' Arial';
 				fontCtx.textAlign = 'center';
-				fontCtx.fillText(personalisedTxt, 1190, 525);
+				fontCtx.fillText(personalisedTxt, 120, 50);
+				this.ctx.drawImage(modelColourCanvas, 0, 0, 2448, 800);
+				this.ctx.drawImage(fontCanvas, 1100, 480, 480, 60);
+				this.ctx.drawImage(imageCanvas, 1100, 400, 240, 220);
 			}
 			if (url == 'mug') {
 				fontCtx.font = fontSize * 2 + 'px' + ' Arial';
 				fontCtx.textAlign = 'center';
 				//fontCtx.fillText(personalisedTxt, 500, 700);
 				fontCtx.fillText(personalisedTxt, 240, 50);
+				this.ctx.drawImage(modelColourCanvas, 0, 0, 2448, 800);
+				this.ctx.drawImage(fontCanvas, 300, 610, 480, 60);
+				this.ctx.drawImage(imageCanvas, 300, 110, 480, 480);
 			}
-
-			this.ctx.drawImage(modelColourCanvas, 0, 0, 2448, 800);
-			this.ctx.drawImage(fontCanvas, 300, 610, 480, 50);
-			this.ctx.drawImage(imageCanvas, 300, 110, 480, 480);
 		});
 	}
 });

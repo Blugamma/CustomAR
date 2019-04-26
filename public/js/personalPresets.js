@@ -22,7 +22,7 @@ if (loginState == 'true') {
 					//Change FontSize
 					document.getElementById('fontSize').value = json[i].fontSize;
 
-					$('#image').trigger('change');
+					$('#imageMenu').trigger('change');
 					$('#mugJscolor').trigger('change');
 					$('#personalTextMenu').trigger('change');
 				}

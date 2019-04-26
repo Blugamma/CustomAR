@@ -97,7 +97,6 @@ html
           i(class="fas fa-sync-alt")
           p Load Design 
     form#personaliseForm(action='/personaliseForm', method='POST', enctype="multipart/form-data")
-      input#image(type='file', name='image', required)
       #presetMenu
         #canvasPreset(style='display: none;')
           p Personal Presets:
@@ -120,9 +119,10 @@ html
           option(value='18') 18
           option(value='30') 30
       #imageMenu
+        input#image(type='file', name='image', required)
+        input#imageBase64(name="imageBase64" type="hidden")
         img#imageCropper
-        button#imageCropBtn Crop Image
-        button#imageCropBtn2 test Image
+        button#imageCropBtn(type='button') Crop Image
       #saveDesignMenu
         p Name the Design
         input#nameOfDesign(name="nameOfDesign", required)

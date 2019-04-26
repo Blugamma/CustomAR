@@ -39,6 +39,8 @@ $('#modelColour').click(function() {
 	$('#personalTextMenu').css('display', 'none');
 	$('#saveDesignMenu').css('display', 'none');
 	$('#imageMenu').css('display', 'none');
+	$('#imageUpload').attr('data-click-state', 0);
+	$('#imageUpload').css('pointer-events', 'auto');
 });
 
 //Load Design overlay show/hide
@@ -49,6 +51,8 @@ $('#loadDesign').click(function() {
 	$('#personalTextMenu').css('display', 'none');
 	$('#saveDesignMenu').css('display', 'none');
 	$('#imageMenu').css('display', 'none');
+	$('#imageUpload').attr('data-click-state', 0);
+	$('#imageUpload').css('pointer-events', 'auto');
 });
 
 $('#imageUpload').click(function() {
@@ -67,6 +71,8 @@ $('#personalText').click(function() {
 	$('#imageMenu').css('display', 'none');
 	$('#saveDesignMenu').css('display', 'none');
 	$('#imageMenu').css('display', 'none');
+	$('#imageUpload').attr('data-click-state', 0);
+	$('#imageUpload').css('pointer-events', 'auto');
 });
 
 //Save Design overlay show/hide
@@ -77,6 +83,8 @@ $('#saveDesign').click(function() {
 	$('#imageMenu').css('display', 'none');
 	$('#personalTextMenu').css('display', 'none');
 	$('#imageMenu').css('display', 'none');
+	$('#imageUpload').attr('data-click-state', 0);
+	$('#imageUpload').css('pointer-events', 'auto');
 });
 
 //Toggle for opening the main overlay
@@ -86,6 +94,8 @@ $('#overlayToggle').click(function() {
 		$(this).attr('data-click-state', 0);
 		$(this).css('left', '80px');
 		$(this).html('<i class="fas fa-chevron-left"></i>');
+		$('#imageUpload').attr('data-click-state', 0);
+		$('#imageUpload').css('pointer-events', 'auto');
 	} else {
 		$(this).attr('data-click-state', 1);
 		$(this).css('left', '0px');
@@ -111,20 +121,43 @@ $('#aFrameScene').click(function() {
 	$('#personalTextMenu').css('display', 'none');
 	$('#saveDesignMenu').css('display', 'none');
 	$('#imageMenu').css('display', 'none');
+	$('#imageUpload').attr('data-click-state', 0);
+	$('#imageUpload').css('pointer-events', 'auto');
 });
 
 var readURL = function(input) {
 	if (input.files && input.files[0]) {
 		var reader = new FileReader();
-
+		reader.onload = function(e) {
+			var w = $('#imageMenu').width();
+			$('#imageCropper').croppie({
+				url: e.target.result,
+				viewport: { width: 380, height: 380 },
+				boundary: { width: w, height: 550 },
+				showZoomer: false,
+				enableResize: false,
+				enableOrientation: true
+			});
+		};
 		reader.readAsDataURL(input.files[0]);
 	}
 };
 
 $('#image').on('change', function() {
+	$('#imageCropper').croppie('destroy');
 	readURL(this);
 });
 
 $('#imageUpload').on('click', function() {
-	$('#image').click();
+	if ($(this).attr('data-click-state') == 1) {
+		$(this).attr('data-click-state', 0);
+		console.log('close');
+		$('#image').click();
+		$('#imageUpload').css('pointer-events', 'auto');
+	} else {
+		console.log('open');
+		$('#image').click();
+		$('#imageUpload').css('pointer-events', 'none');
+		$(this).attr('data-click-state', 1);
+	}
 });
