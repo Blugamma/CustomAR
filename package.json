@@ -1,5 +1,5 @@
 {
-	"name": "personalisar",
+	"name": "customar",
 	"version": "1.0.0",
 	"description": "A way of personalising a product in Augmented Reality",
 	"main": "app.js",
@@ -25,12 +25,12 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/Blugamma/personalisAR.git"
+		"url": "git+https://github.com/Blugamma/CustomAR.git"
 	},
 	"author": "Oliver Smith",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/Blugamma/personalisAR/issues"
+		"url": "https://github.com/Blugamma/CustomAR/issues"
 	},
-	"homepage": "https://github.com/Blugamma/personalisAR#readme"
+	"homepage": "https://github.com/Blugamma/CustomAR#readme"
 }
