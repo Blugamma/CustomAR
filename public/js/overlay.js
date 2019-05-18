@@ -125,6 +125,7 @@ $('#aFrameScene').click(function() {
 	$('#imageUpload').css('pointer-events', 'auto');
 });
 
+//Opens an image and generates a croppie instances to crop the image to the correct size
 var readURL = function(input) {
 	if (input.files && input.files[0]) {
 		var reader = new FileReader();
@@ -143,11 +144,13 @@ var readURL = function(input) {
 	}
 };
 
+//When a new image gets added it will destory the croppie instance
 $('#image').on('change', function() {
 	$('#imageCropper').croppie('destroy');
 	readURL(this);
 });
 
+//Makes the image upload button not clickable when user is using the cropping tool
 $('#imageUpload').on('click', function() {
 	if ($(this).attr('data-click-state') == 1) {
 		$(this).attr('data-click-state', 0);

@@ -1,4 +1,6 @@
+//Code only runs when the user is logged in
 if (loginState == 'true') {
+	//When a change is applied to the pre-set drop down in the menu it will run this code
 	$('#canvasPresets').change(function() {
 		var personalPreset = document.getElementById('canvasPresets');
 		var personalPresetValue = personalPreset.options[personalPreset.selectedIndex].value;

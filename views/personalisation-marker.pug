@@ -36,6 +36,7 @@ html
     script(src='js/jscolor.js')
     script(src='js/croppie.js')
     link(rel='stylesheet', type='text/css', href='css/croppie.css')
+    //- Pug command that is checking for a server variable and then loading in a data string
     if presets != underfiend
       script.
         var presetLink = JSON.parse('!{JSON.stringify(presetLink)}');
@@ -51,6 +52,7 @@ html
         a-obj-model(scale=scale, src=model, rotation=rotation, material="src: #canvas")
           //- <a-animation attribute="rotation" dur="9000" to="0 360 0" repeat="indefinite" easing="linear"></a-animation>
       a-camera-static
+    //- THE OLD OVERLAY
     //- #overlay
     //-   #logo
     //-     img(src='images/logo.png')
@@ -77,6 +79,8 @@ html
     //-       option(value='30') 30
     //-     input#nameOfDesign(placeholder="Name of Design", name="nameOfDesign", required)
     //-     button.btn#saveDesign(style='display: none;', type="submit") Save Design
+
+    //- The new overlay
     #overlayToggle
       i(class="fas fa-chevron-left")
     #overlay2

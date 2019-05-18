@@ -1,3 +1,4 @@
+//variables
 const express = require('express');
 const app = express();
 const multer = require('multer');
@@ -14,6 +15,8 @@ const uuidv4 = require('uuid/v4');
 const port = 8080;
 var presetLink =
 	'https://api.mlab.com/api/1/databases/personalisar/collections/personalcanvas?apiKey=QcMYUxzSPh1UFvwhGMNJHciyVqHemZmC';
+
+//app.use cases
 app.use(
 	bodyParser.urlencoded({
 		extended: false
@@ -24,7 +27,6 @@ app.use(
 		type: 'application/*+json'
 	})
 );
-app.set('view engine', 'pug');
 app.use(device.capture());
 app.use(
 	express.static('public', {
@@ -32,7 +34,6 @@ app.use(
 	})
 );
 app.use(express.static('uploads'));
-// parse application/x-www-form-urlencoded
 app.use(
 	session({
 		cookie: {
@@ -43,11 +44,16 @@ app.use(
 		secret: 'eeuqram'
 	})
 );
-// parse application/json
 app.use(cookieParser());
 
+//setting up the javascript framework engine
+app.set('view engine', 'pug');
+
+//Loading in model files for MongoDB
 var User = require('./public/js/models/user');
 var personalCanvas = require('./public/js/models/personalCanvas');
+
+//variables for multer
 var storage = multer.diskStorage({
 	destination: function(req, file, cb) {
 		cb(null, 'public/uploads/');
@@ -64,11 +70,13 @@ const upload = multer({
 	}
 });
 
+//mongoose connecting to mongodb database
 mongoose.connect('mongodb://testUser:password123@ds123012.mlab.com:23012/personalisar', function(err) {
 	if (err) throw err;
 	console.log('Successfully connected');
 });
 
+//homepage
 app.get('/', function(req, res) {
 	sess = req.session;
 	if (sess.email) {
@@ -80,6 +88,7 @@ app.get('/', function(req, res) {
 	}
 });
 
+//logout function
 app.get('/logout', function(req, res) {
 	sess = req.session;
 	sess.destroy();
@@ -87,6 +96,7 @@ app.get('/logout', function(req, res) {
 	res.redirect('/');
 });
 
+//customisation page
 app.get('/customisation', function(req, res, err) {
 	sess = req.session;
 	var deviceType = req.device.type;
@@ -191,10 +201,12 @@ app.get('/customisation', function(req, res, err) {
 	}
 });
 
+//customise form that sends the users design to the database
 app.post('/customiseForm', upload.single('image'), function(req, res, err) {
 	if (err) console.log(err);
 	sess = req.session;
 	console.log(req.body);
+	//Saving the cropped image
 	var filename = uuidv4();
 	var img = req.body.imageBase64;
 	var imageDecoded = img.split(';base64,').pop();
@@ -202,6 +214,7 @@ app.post('/customiseForm', upload.single('image'), function(req, res, err) {
 	fs.writeFile('public/uploads/' + newImageName, imageDecoded, { encoding: 'base64' }, function() {
 		console.log('file created');
 	});
+
 	var userID = sess.userid;
 	var newpersonalCanvasData = new personalCanvas({
 		userId: userID,
@@ -212,12 +225,15 @@ app.post('/customiseForm', upload.single('image'), function(req, res, err) {
 		textColour: req.body.textColour,
 		fontSize: req.body.fontSize
 	});
+
+	//customised data being saved to the database
 	newpersonalCanvasData.save(function(error, record) {
 		if (error) console.log(error);
 		console.log(record + ' Successfully Uploaded!');
 	});
 });
 
+//register form
 app.post('/register', function(req, res, err) {
 	if (err) console.log(err);
 	var newUserData = new User({
@@ -250,6 +266,7 @@ app.post('/register', function(req, res, err) {
 	);
 });
 
+//login form
 app.post('/login', function(req, res, err) {
 	if (err) console.log(err);
 	User.findOne(
@@ -295,11 +312,7 @@ app.post('/login', function(req, res, err) {
 	);
 });
 
-/* app.post('/imageUpload', upload.single('image'), function (req, res, next) {
-  // req.file is the `avatar` file
-  // req.body will hold the text fields, if there were any
-  console.log(req.file.originalname);
-}); */
+//port listening
 app.listen(port, () => {
 	console.log(`App is listening to ${port}`);
 });

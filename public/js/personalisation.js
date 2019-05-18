@@ -19,6 +19,7 @@ fontCanvas.width = 480;
 fontCanvas.height = 60;
 var fontCtx = fontCanvas.getContext('2d');
 
+//Recieves the current URL
 function getUrlVars() {
 	var vars = {};
 	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
@@ -27,8 +28,9 @@ function getUrlVars() {
 	return vars;
 }
 
+//Gets the model parameter from the current URL
 var url = getUrlVars()['model'];
-//Mug canvas personalisation
+//canvas customisation
 AFRAME.registerComponent('start', {
 	init: function() {
 		this.canvas = document.getElementById('canvas');
@@ -60,12 +62,7 @@ AFRAME.registerComponent('start', {
 			this.ctx.scale(this.ratio, this.ratio);
 		}
 
-		//Defaults for Canvas
-		this.ctx.fillStyle = 'white';
-		this.ctx.fillRect(0, 0, 2448, 800);
-
-		this.ctx.fillStyle = 'black';
-		this.ctx.fillText('Text Here', 40, 100);
+		//When a new background colour is applied it will run this code
 		$('#mugJscolor').change(function() {
 			this.canvas = document.getElementById('canvas');
 			this.ctx = canvas.getContext('2d');
@@ -86,6 +83,7 @@ AFRAME.registerComponent('start', {
 			}
 		});
 
+		//When a new image is uploaded it will generate the image onto the canvas
 		$('#imageMenu').change(function() {
 			this.canvas = document.getElementById('canvas');
 			this.ctx = canvas.getContext('2d');
@@ -117,8 +115,6 @@ AFRAME.registerComponent('start', {
 				}
 			};
 			if (canvasImage.files[0] != undefined) {
-				//$('#imageCropper').attr('src', URL.createObjectURL(canvasImage.files[0]));
-
 				$('#imageCropBtn').click(function() {
 					$('#imageUpload').css('pointer-events', 'auto');
 					$('#imageUpload').attr('data-click-state', 0);
@@ -139,7 +135,7 @@ AFRAME.registerComponent('start', {
 			} else {
 				console.log('image not selected');
 			}
-
+			//When the user is logged in the pre-set dropdown gets populated with the designs the user has created
 			if (loginState == 'true') {
 				var personalPreset = document.getElementById('canvasPresets');
 				var personalPresetValue = personalPreset.options[personalPreset.selectedIndex].value;
@@ -154,6 +150,8 @@ AFRAME.registerComponent('start', {
 				});
 			}
 		});
+
+		//When a change is made in the personal text menu it will run this code.
 		$('#personalTextMenu').change(function() {
 			this.canvas = document.getElementById('canvas');
 			this.ctx = canvas.getContext('2d');
