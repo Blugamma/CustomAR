@@ -86,13 +86,12 @@ header {
 }
 
 #logo h1 {
-	padding-left: 10px;
+	padding-left: 60px;
 	margin: 0;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 25px;
 	font-weight: 100;
 	color: #38aa82;
-	float: left;
 }
 
 .headerIcons {

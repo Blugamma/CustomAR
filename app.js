@@ -87,7 +87,7 @@ app.get('/logout', function(req, res) {
 	res.redirect('/');
 });
 
-app.get('/personalisation', function(req, res, err) {
+app.get('/customisation', function(req, res, err) {
 	sess = req.session;
 	var deviceType = req.device.type;
 	var modelId = req.query.model;
@@ -191,7 +191,7 @@ app.get('/personalisation', function(req, res, err) {
 	}
 });
 
-app.post('/personaliseForm', upload.single('image'), function(req, res, err) {
+app.post('/customiseForm', upload.single('image'), function(req, res, err) {
 	if (err) console.log(err);
 	sess = req.session;
 	console.log(req.body);
