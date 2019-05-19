@@ -146,7 +146,6 @@ var readURL = function(input) {
 
 //When a new image gets added it will destory the croppie instance
 $('#image').on('change', function() {
-	$('#imageCropper').croppie('destroy');
 	readURL(this);
 });
 

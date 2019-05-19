@@ -61,7 +61,8 @@ AFRAME.registerComponent('start', {
 
 			this.ctx.scale(this.ratio, this.ratio);
 		}
-
+		this.ctx.fillStyle = '#FFFFFF';
+		this.ctx.fillRect(0, 0, 2448, 800);
 		//When a new background colour is applied it will run this code
 		$('#mugJscolor').change(function() {
 			this.canvas = document.getElementById('canvas');
@@ -121,15 +122,16 @@ AFRAME.registerComponent('start', {
 					$('#imageCropper')
 						.croppie('result', {
 							type: 'base64',
-							format: 'jpeg'
+							format: 'jpeg',
+							quality: 0.8
 						})
 						.then(function(resp) {
 							img.src = resp;
 							var imageBase64 = document.getElementById('imageBase64');
+							imageBase64.value = '';
 							imageBase64.value = resp;
-							$('#imageCropper').croppie('destroy');
 						});
-
+					$('#imageCropper').croppie('destroy');
 					$('#imageMenu').css('display', 'none');
 				});
 			} else {

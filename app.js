@@ -211,10 +211,10 @@ app.post('/customiseForm', upload.single('image'), function(req, res, err) {
 	var img = req.body.imageBase64;
 	var imageDecoded = img.split(';base64,').pop();
 	var newImageName = 'base64-' + filename + '.jpg';
-	fs.writeFile('public/uploads/' + newImageName, imageDecoded, { encoding: 'base64' }, function() {
+	fs.writeFile('public/uploads/' + newImageName, imageDecoded, { encoding: 'base64' }, function(err) {
+		if (err) throw err;
 		console.log('file created');
 	});
-
 	var userID = sess.userid;
 	var newpersonalCanvasData = new personalCanvas({
 		userId: userID,
@@ -231,6 +231,7 @@ app.post('/customiseForm', upload.single('image'), function(req, res, err) {
 		if (error) console.log(error);
 		console.log(record + ' Successfully Uploaded!');
 	});
+	res.redirect('back');
 });
 
 //register form
