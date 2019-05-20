@@ -73,7 +73,7 @@ if (emailRegErrorCookie == 'true') {
 	loginForm.style = 'display:none;';
 	loginTitle.style = 'background-color: none; color: #38aa82;';
 	registerTitle.style = 'background-color: #38aa82; color: white;';
-	emailRegError.innerHTML = data.message;
+	emailRegError.innerHTML = 'Email aleady exists!';
 }
 
 //When an email gets entered in correctly it removes and error messages
